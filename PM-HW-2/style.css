@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#grid {
+    height: 100vh;
+    margin: 40px;
+    display: grid;
+    grid-auto-rows: minmax(25px, 50px);
+    grid-auto-columns: minmax(25px, 50px);
+}
+
+#item1 {
+    grid-row: 1 / 4;
+    grid-column: 1 / 4;
+    background-color: #ff8888;
+    z-index: 3;
+}
+
+#item2 {
+    grid-row: 3 / 6;
+    grid-column: 3 / 6;
+    background-color: #7d89eb;
+    z-index: 2;
+}
+
+#item3 {
+    grid-row: 5 / 8;
+    grid-column: 5 / 8;
+    background-color: #4cef98;
+    z-index: 1;
+}
+
+#grid > div:hover {
+    z-index: 10;
+}
