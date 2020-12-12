@@ -12,27 +12,24 @@
     grid-auto-columns: minmax(25px, 50px);
 }
 
+#grid > div:hover {
+    z-index: 10;
+}
+
 #item1 {
-    grid-row: 1 / 4;
-    grid-column: 1 / 4;
+    grid-area: 1 / 1 / 4 / 4;
     background-color: #ff8888;
     z-index: 3;
 }
 
 #item2 {
-    grid-row: 3 / 6;
-    grid-column: 3 / 6;
+    grid-area: 3 / 3 / 6 / 6;
     background-color: #7d89eb;
     z-index: 2;
 }
 
 #item3 {
-    grid-row: 5 / 8;
-    grid-column: 5 / 8;
+    grid-area: 5 / 5 / 8 / 8;
     background-color: #4cef98;
     z-index: 1;
-}
-
-#grid > div:hover {
-    z-index: 10;
 }
