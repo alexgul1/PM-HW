@@ -2,7 +2,7 @@ const numbersRange = function (n, m) {
   n = parseInt(n, 10);
   m = parseInt(m, 10);
   return m >= n ?
-    [...Array(m - n + 1)].map((_, index) => n + index) : "Введены некорректные данные";
+    Array.from({length : m - n + 1}, (_, index) => index + n) : "Введены некорректные данные";
 }
 
 const exponentiationExpression = function (a, b = 2) {
