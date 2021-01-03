@@ -9,7 +9,7 @@ const getIndexEntries = function (str, substr) {
 }
 
 const getAllNumbers = function (str) {
-  return str.match(/\d/g);
+  return str.match(/\d+/g);
 }
 
 const getUpperCaseSymbols = function (str) {

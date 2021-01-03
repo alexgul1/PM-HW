@@ -6,10 +6,14 @@ const numbersRange = function (n, m) {
 }
 
 const exponentiationExpression = function (a, b = 2) {
-  return Math.pow(parseInt(a, 10), parseInt(b, 10)) || "Введены некорректные данные";
+  let ans = Math.pow(+a, +b);
+  return Number.isFinite(ans) ? ans : "Введены некорректные данные";
 }
 
-const exponentiationArrow = (a, b = 2) => Math.pow(parseInt(a, 10), parseInt(b, 10)) || "Введены некорректные данные";
+const exponentiationArrow = (a, b = 2) => {
+  let ans = Math.pow(+a, +b);
+  return Number.isFinite(ans) ? ans : "Введены некорректные данные";
+}
 
 const multiplication = function (a, b) {
   a = parseFloat(a);
