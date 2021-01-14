@@ -1,11 +1,15 @@
 ((document) => {
 
-  /* MAIN PART OF PROGRAM */
+  /* Variables */
 
   const root = document.querySelector('#root');
   const menu = document.querySelector("#menu");
   let isMenuVisible = false;
   let activeTarget = null;
+  let isMultiSelect = false;
+  let selectedItemsList = [];
+
+  /* Main part of program */
 
   const renderFileList = () => {
     fileList.forEach(file => {
@@ -18,7 +22,9 @@
   };
 
   const fillContextMenu = (target) => {
-    if (target.dataset.structure === "root") {
+    if (Array.isArray(target)) {
+      menu.innerHTML = "<div class='menu-option' data-action='delete'>Delete</div>"
+    } else if (target.dataset.structure === "root") {
       menu.innerHTML = "<div class='menu-option' data-action='create'>Create</div>"
     } else {
       menu.innerHTML = "<div class='menu-option' data-action='rename'>Rename</div>" +
@@ -28,7 +34,10 @@
 
   const toggleMenu = (isShow) => {
     menu.style.display = isShow ? "block" : "none";
-    if (!isShow) activeTarget = null;
+    if (!isShow) {
+      if(activeTarget && !Array.isArray(activeTarget)) activeTarget.classList.remove('selected');
+      activeTarget = null;
+    }
   };
 
   const setPositionMenu = (origin) => {
@@ -44,16 +53,18 @@
     }
 
     event.preventDefault();
-    activeTarget = event.target;
-
     const origin = {
       left: event.pageX,
       top: event.pageY
     };
-    fillContextMenu(event.target);
-    setPositionMenu(origin);
 
-    console.log(event.target)
+    styleHandler(event);
+
+    isMultiSelect && selectedItemsList.includes(event.target) ?
+      activeTarget = [...selectedItemsList] : activeTarget = event.target;
+
+    fillContextMenu(activeTarget);
+    setPositionMenu(origin);
   };
 
   const contextMenuAction = (event) => {
@@ -76,7 +87,7 @@
   const createFile = () => {
     const fileName = prompt("Enter filename");
 
-    if(fileName === null) return;
+    if (fileName === null) return;
     if (fileName.trim()) {
       const div = document.createElement('div');
       div.dataset.structure = "file";
@@ -89,6 +100,13 @@
   };
 
   const deleteFile = () => {
+    if (Array.isArray(activeTarget)) {
+      const isConfirm = confirm("Are you sure to delete selected files?")
+      if (isConfirm) {
+        activeTarget.forEach(target => target.remove());
+      }
+      return;
+    }
     const isConfirm = confirm(`Are you sure to delete ${activeTarget.innerText}`);
     if (isConfirm) {
       activeTarget.remove();
@@ -98,7 +116,7 @@
   const renameFile = () => {
     const newFileName = prompt("Enter new filename", activeTarget.innerText);
 
-    if(newFileName === null) return;
+    if (newFileName === null) return;
     if (newFileName.trim()) {
       activeTarget.innerText = newFileName.trim();
     } else {
@@ -106,11 +124,11 @@
     }
   };
 
-
   /* Drag'n'Drop */
 
   const dragStartHandler = (event) => {
     event.target.style.opacity = "0.4";
+    event.target.classList.add('selected');
     activeTarget = event.target;
   }
 
@@ -119,7 +137,7 @@
 
     const currentElem = event.target;
     const isMovable = activeTarget !== currentElem && currentElem.dataset.structure === "file";
-    if(!isMovable) {
+    if (!isMovable) {
       return;
     }
 
@@ -129,6 +147,35 @@
 
   const dragEndHandler = (event) => {
     event.target.style.opacity = "1";
+    event.target.classList.remove('selected');
+  }
+
+  /* Multi selection */
+
+  const selectionItemsHandler = (event) => {
+    if (!event.ctrlKey || event.target.dataset.structure !== "file") {
+      isMultiSelect = false;
+      selectedItemsList.forEach(item => item.classList.remove('selected'));
+      selectedItemsList = [];
+      return;
+    }
+    event.target.classList.add('selected');
+    selectedItemsList.push(event.target);
+    isMultiSelect = true;
+  }
+
+  /* Helper functions */
+
+  const styleHandler = (event) => {
+    if(event.target.dataset.structure !== "file") return;
+    if(Array.isArray(activeTarget) && !activeTarget.includes(event.target)) {
+      console.log(true);
+      activeTarget.forEach(item => item.classList.remove('selected'));
+    }
+    else if(activeTarget !== event.target && activeTarget) {
+      activeTarget.classList.remove('selected');
+    }
+    event.target.classList.add('selected');
   }
 
   /* Listeners */
@@ -142,5 +189,9 @@
 
   document.addEventListener('dragstart', dragStartHandler);
   document.addEventListener('dragover', dragOverHandler);
-  document.addEventListener("dragend", dragEndHandler)
+  document.addEventListener("dragend", dragEndHandler);
+
+  document.addEventListener('click', selectionItemsHandler);
+
+
 })(window.document);
