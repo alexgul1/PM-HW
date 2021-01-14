@@ -1,12 +1,16 @@
 ((document) => {
+
+  /* MAIN PART OF PROGRAM */
+
   const root = document.querySelector('#root');
   const menu = document.querySelector("#menu");
   let isMenuVisible = false;
-  let currentTarget = null;
+  let activeTarget = null;
 
   const renderFileList = () => {
     fileList.forEach(file => {
       const div = document.createElement('div');
+      div.draggable = true;
       div.dataset.structure = "file";
       div.innerText = file;
       root.appendChild(div);
@@ -24,7 +28,7 @@
 
   const toggleMenu = (isShow) => {
     menu.style.display = isShow ? "block" : "none";
-    if (!isShow) currentTarget = null;
+    if (!isShow) activeTarget = null;
   };
 
   const setPositionMenu = (origin) => {
@@ -40,7 +44,7 @@
     }
 
     event.preventDefault();
-    currentTarget = event.target;
+    activeTarget = event.target;
 
     const origin = {
       left: event.pageX,
@@ -64,7 +68,7 @@
     };
 
     const action = actionsMap[event.target.dataset.action];
-    if (typeof action === "function" && currentTarget) {
+    if (typeof action === "function" && activeTarget) {
       action();
     }
   };
@@ -76,6 +80,7 @@
     if (fileName.trim()) {
       const div = document.createElement('div');
       div.dataset.structure = "file";
+      div.draggable = true
       div.innerText = fileName;
       root.appendChild(div);
     } else {
@@ -84,22 +89,49 @@
   };
 
   const deleteFile = () => {
-    const isConfirm = confirm(`Are you sure to delete ${currentTarget.innerText}`);
+    const isConfirm = confirm(`Are you sure to delete ${activeTarget.innerText}`);
     if (isConfirm) {
-      currentTarget.remove();
+      activeTarget.remove();
     }
   };
 
   const renameFile = () => {
-    const newFileName = prompt("Enter new filename", currentTarget.innerText);
+    const newFileName = prompt("Enter new filename", activeTarget.innerText);
 
     if(newFileName === null) return;
     if (newFileName.trim()) {
-      currentTarget.innerText = newFileName.trim();
+      activeTarget.innerText = newFileName.trim();
     } else {
       alert('Inappropriate filename');
     }
   };
+
+
+  /* Drag'n'Drop */
+
+  const dragStartHandler = (event) => {
+    event.target.style.opacity = "0.4";
+    activeTarget = event.target;
+  }
+
+  const dragOverHandler = (event) => {
+    event.preventDefault()
+
+    const currentElem = event.target;
+    const isMovable = activeTarget !== currentElem && currentElem.dataset.structure === "file";
+    if(!isMovable) {
+      return;
+    }
+
+    const nextElement = currentElem === activeTarget.nextElementSibling ? currentElem.nextElementSibling : currentElem;
+    root.insertBefore(activeTarget, nextElement);
+  }
+
+  const dragEndHandler = (event) => {
+    event.target.style.opacity = "1";
+  }
+
+  /* Listeners */
 
   document.addEventListener('DOMContentLoaded', renderFileList);
   document.addEventListener('contextmenu', contextMenuHandler);
@@ -107,4 +139,8 @@
   document.addEventListener('click', () => {
     if (isMenuVisible) toggleMenu(false);
   });
+
+  document.addEventListener('dragstart', dragStartHandler);
+  document.addEventListener('dragover', dragOverHandler);
+  document.addEventListener("dragend", dragEndHandler)
 })(window.document);
