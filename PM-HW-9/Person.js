@@ -22,7 +22,7 @@ class Person {
     if(genderValues.includes(newValue)) {
       this.#genderVal = newValue;
     } else {
-      throw new PersonGenderError('This gender is unavailable')
+      throw new PersonGenderError(`This gender: ${newValue} is unavailable`);
     }
   }
 
@@ -49,12 +49,7 @@ console.log(`Gender: ${person.gender}`);
 
 
 class PersonLog extends Person{
-
   #logsArr = [];
-
-  get logs() {
-    return this.#logsArr;
-  }
 
   constructor(name, gender) {
     super(name, gender);
@@ -70,6 +65,10 @@ class PersonLog extends Person{
     });
 
     return Object.seal(proxied);
+  }
+
+  get logs() {
+    return this.#logsArr;
   }
 
   #updateLogs(prop, value) {
