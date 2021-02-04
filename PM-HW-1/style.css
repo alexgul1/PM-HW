@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-list {
+    padding-top: 10px;
+}
+
+.card {
+    padding: 20px 20px 30px;
+    width: 600px;
+    border: 2px solid #b4b4b4;
+    margin: auto auto 20px;
+}
+
+.card_title {
+    color: #0c15ff;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin-bottom: 5px;
+}
+
+.card_more-info {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.card_more-info:hover {
+    color: #191970;
+}
