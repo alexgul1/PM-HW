@@ -1,4 +1,4 @@
-class PersonGenderError extends Error{
+class PersonGenderError extends Error {
   constructor(message) {
     super(message);
   }
@@ -19,7 +19,7 @@ class Person {
 
   #updateGender(newValue) {
     const genderValues = Object.values(Person.GENDER);
-    if(genderValues.includes(newValue)) {
+    if (genderValues.includes(newValue)) {
       this.#genderVal = newValue;
     } else {
       throw new PersonGenderError(`This gender: ${newValue} is unavailable`);
@@ -36,7 +36,11 @@ class Person {
   }
 
   set gender(newValue) {
-    this.#updateGender(newValue);
+    try {
+      this.#updateGender(newValue);
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 }
 
@@ -44,11 +48,12 @@ console.log("Person Block");
 const person = new Person("s");
 person.gender = 1;
 console.log(`Gender: ${person.gender}`);
-//Try to set non-existent value will throw an error
-//person.gender = 5;
+//Try to set non-existent value
+person.gender = 5;
+console.log(`Gender: ${person.gender}`);
 
 
-class PersonLog extends Person{
+class PersonLog extends Person {
   #logsArr = [];
 
   constructor(name, gender) {
@@ -59,8 +64,11 @@ class PersonLog extends Person{
         return Reflect.get(target, prop);
       },
       set(target, prop, value) {
-        target.#updateLogs(prop, value);
-        return Reflect.set(target, prop, value);
+        if (Reflect.has(target, prop)) {
+          const temp = target[prop];
+          Reflect.set(target, prop, value)
+          target.#updateLogs(prop, temp, value);
+        }
       }
     });
 
@@ -71,9 +79,9 @@ class PersonLog extends Person{
     return this.#logsArr;
   }
 
-  #updateLogs(prop, value) {
-    if (typeof this[prop] !== 'undefined' && prop !== "logs") {
-      this.#logsArr.push(`${prop}: from ${this[prop]} to ${value}`);
+  #updateLogs(prop, oldValue, newValue) {
+    if (this[prop] !== oldValue && prop !== "logs") {
+      this.#logsArr.push(`${prop}: from ${oldValue} to ${newValue}`);
     }
   }
 }
@@ -87,8 +95,9 @@ personWithLog.name = "Sasha";
 personWithLog.gender = 2;
 personWithLog.gender = 1;
 personWithLog.gender = 0;
+personWithLog.gender = 5;
 
-//Try to update non-existing prop
+//Try to set non-existing prop
 personWithLog.asd = "qwe";
 console.log(personWithLog.asd, personWithLog.hasOwnProperty("asd"));
 
