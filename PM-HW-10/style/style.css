@@ -19,7 +19,7 @@ img {
 .container {
     max-width: 1280px;
     margin: auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .wrapper {
@@ -27,7 +27,9 @@ img {
     margin: 20px auto;
 }
 
-.wrapper .search-input {
+.search-input {
+    max-width: 450px;
+    margin: 20px auto;
     background: #fff;
     width: 100%;
     border-radius: 5px;
@@ -51,35 +53,16 @@ img {
 }
 
 .search-input .autocom-box {
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
-    max-height: 280px;
-    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+
 }
 
 .search-input.active .autocom-box {
     padding: 10px 8px;
     opacity: 1;
-    pointer-events: auto;
 }
 
-.autocom-box li {
-    list-style: none;
-    padding: 8px 12px;
-    display: none;
-    width: 100%;
-    cursor: default;
-    border-radius: 3px;
-}
-
-.search-input.active .autocom-box li {
-    display: block;
-}
-
-.autocom-box li:hover {
-    background: #efefef;
-}
 
 .search-input .icon {
     position: absolute;
@@ -98,7 +81,15 @@ img {
     vertical-align: middle;
 }
 
+.no-user {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
 .tabs-container {
+    order: 0;
     display: flex;
     width: 100%;
     justify-content: flex-end;
@@ -154,9 +145,11 @@ img {
     justify-content: center;
     column-gap: 5%;
     row-gap: 30px;
+    padding-bottom: 50px;
 }
 
 .user-info {
+    order: 1;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -164,6 +157,7 @@ img {
 }
 
 .user-repos-follows {
+    order: 2;
     width: 70%;
 }
 
@@ -216,10 +210,39 @@ img {
     border-radius: 50%;
 }
 
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination .button {
+    background-color: #f1f1f1;
+    padding: 6px 16px;
+    color: #000000;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    outline:none;
+}
+
+.pagination .button:not(:disabled):hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}
+
+.pagination .button:disabled {
+    background-color: rgba(221, 221,221, .7);
+}
+
+
 @media screen and (max-width: 768px) {
     .user {
         flex-direction: column;
     }
+
     .user-info {
         width: 100%;
         flex-direction: row;
@@ -245,3 +268,12 @@ img {
     }
 }
 
+.hide {
+    display: none;
+}
+
+@media screen and (max-width: 425px){
+    .tabs-menu .tab .icon {
+        display: none;
+    }
+}
