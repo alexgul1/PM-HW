@@ -1,4 +1,5 @@
 const END_POINT = "https://api.github.com";
+const AuthToken = "";
 
 class HttpService {
   static async request({path, params = {}}) {
@@ -13,7 +14,8 @@ class HttpService {
 
     const options = {
       headers: {
-        "Accept" : "application/vnd.github.v3+json"
+        "Accept" : "application/vnd.github.v3+json",
+      ...(AuthToken && {"Authorization": `token ${AuthToken}`})
       }
     }
 
