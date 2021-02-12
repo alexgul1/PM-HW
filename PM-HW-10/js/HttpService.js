@@ -13,8 +13,7 @@ class HttpService {
 
     const options = {
       headers: {
-        "Accept" : "application/vnd.github.v3+json",
-        "Authorization": "token ac29cac025933f05dc68e3d88bf232c6d6cab429"
+        "Accept" : "application/vnd.github.v3+json"
       }
     }
 
