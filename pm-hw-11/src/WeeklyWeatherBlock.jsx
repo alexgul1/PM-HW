@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./WeaklyWeatherBlock.module.css";
+import styles from "./WeeklyWeatherBlock.module.css";
 
 const DailyWeatherBlock = ({date, lowestTemp, highestTemp, weatherIcon, wind, humidity, pressure, uvLevel}) => {
   const dateFormatOptions = {weekday: "short", year: "numeric", month: "short", day: "numeric"};
@@ -60,7 +60,7 @@ const WeatherDetails = ({wind, humidity, pressure, uvLevel}) => {
   )
 }
 
-const WeaklyWeatherBlock = () => {
+const WeeklyWeatherBlock = () => {
   return (
     <div className={styles["container"]}>
       <DailyWeatherBlock date="22/02/2021" lowestTemp="20" highestTemp="40" weatherIcon="sun" wind="W 11 kmph"
@@ -81,4 +81,4 @@ const WeaklyWeatherBlock = () => {
   );
 };
 
-export default WeaklyWeatherBlock;
+export default WeeklyWeatherBlock;
