@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WeeklyWeatherBlock from './WeeklyWeatherBlock';
+import App from "./App";
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <WeeklyWeatherBlock/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
