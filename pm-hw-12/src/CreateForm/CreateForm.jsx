@@ -17,7 +17,6 @@ class CreateForm extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-
   inputHandler(event) {
     this.setState({
       input: event.target.value.trim()
@@ -33,7 +32,6 @@ class CreateForm extends React.Component {
       }
     });
   }
-
 
   submitForm(event) {
     event.preventDefault();
@@ -64,7 +62,6 @@ class CreateForm extends React.Component {
 
     return <div className={styles["container"]}>{isVisible ? form : createBtn}</div>;
   }
-
 }
 
 export default CreateForm;
