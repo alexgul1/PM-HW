@@ -2,6 +2,7 @@
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
     height: 100%;
+    width: 390px;
 }
 
 .header {
@@ -22,4 +23,9 @@
 .list {
     padding: 20px;
     background-color: #fafafb;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
+
+

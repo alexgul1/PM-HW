@@ -4,6 +4,8 @@
     background-color: white;
     box-shadow: 0 0 8px -3px rgba(0,0,0,0.3);
     border-radius: 5px;
+    white-space: pre-line;
+    word-break: break-word;
 }
 
 .text {
@@ -18,4 +20,43 @@
     justify-content: space-between;
     background-color: aquamarine;
     padding: 10px 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.info p {
+    font-weight: bold;
+    color: white;
+}
+
+.votes {
+    display: flex;
+    column-gap: 10px;
+    color: white;
+    user-select: none;
+}
+
+.vote-btn {
+    background: inherit;
+    outline: none;
+    border: none;
+    color: inherit;
+}
+
+.vote-btn:hover {
+    cursor: pointer;
+}
+
+.downvote:hover {
+    color: #5a75cc;
+}
+
+.upvote:hover {
+    color: #cc3700;
+}
+
+.rating {
+    text-align: center;
+    font-size: 17px;
+    width: 30px;
 }
