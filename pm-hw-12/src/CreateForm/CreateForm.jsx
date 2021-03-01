@@ -10,6 +10,7 @@ class CreateForm extends React.Component {
       input: ""
     };
 
+    this.focusRef = React.createRef();
 
     this.changeVisibility = this.changeVisibility.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
@@ -26,7 +27,11 @@ class CreateForm extends React.Component {
   changeVisibility() {
     this.setState({
       isVisible: !this.state.isVisible
-    })
+    }, () => {
+      if (this.state.isVisible) {
+        this.focusRef.current.focus();
+      }
+    });
   }
 
 
@@ -34,13 +39,12 @@ class CreateForm extends React.Component {
     event.preventDefault();
     const {input} = this.state;
 
-    if(input) {
+    if (input) {
       this.setState({
         input: ""
       })
       this.changeVisibility();
       this.props.createCard(input);
-
     }
   }
 
@@ -51,7 +55,7 @@ class CreateForm extends React.Component {
 
     const form = (
       <form className={styles['form']}>
-        <textarea rows="10" placeholder="Type here..." onInput={this.inputHandler}/>
+        <textarea placeholder="Type here..." onInput={this.inputHandler} ref={this.focusRef}/>
         <div className={styles['actions']}>
           <button className={styles['cancel-btn']} onClick={this.changeVisibility}>Cancel</button>
           <button className={styles['add-btn']} onClick={this.submitForm} disabled={!input.length}>Add note</button>
