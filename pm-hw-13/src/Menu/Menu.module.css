@@ -1,0 +1,22 @@
+.menuContainer {
+    display: flex;
+    background-color: #f9f9f9;
+    padding: 20px 0;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+
+.link {
+    font-size: 20px;
+    color: #929293;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #404041;
+}
+
+.selected {
+    color: black;
+}
