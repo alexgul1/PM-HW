@@ -1,0 +1,25 @@
+.container {
+    margin-top: 30px;
+    padding: 0 30px;
+}
+
+.todoList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.select {
+    padding: 5px;
+    margin-bottom: 40px;
+}
+
+.newTodo input,
+.newTodo button{
+    padding: 5px;
+}

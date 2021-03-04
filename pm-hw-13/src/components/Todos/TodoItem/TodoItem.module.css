@@ -7,6 +7,7 @@
     width: 500px;
     background-color: #f9f9f9;
     border-radius: 10px;
+    column-gap: 20px;
 }
 
 .title {
@@ -17,12 +18,28 @@
     transition: color 0.4s;
 }
 
-.toggle {
+.button {
+    width: 30px;
+    height: 30px;
     justify-self: flex-end;
+    border: none;
+    background-color: #dc3545;
+    text-align: center;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #c82333;
+}
+
+.isHide {
+    display: none;
 }
 
 .completed {
-
     color: #d9d9d9;
     text-decoration: line-through;
 }

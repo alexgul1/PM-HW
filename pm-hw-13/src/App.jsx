@@ -1,10 +1,11 @@
-import logo from './logo.svg';
-import styles from './App.module.css';
+import React from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import Menu from "./Menu/Menu";
-import Weather from "./Weather/Weather";
-import Retrospective from "./Retrospective/Retrospective";
-import Todos from "./Todos/Todos";
+import Menu from "./components/Menu/Menu";
+import Weather from "./components/Weather/Weather";
+import Retrospective from "./components/Retrospective/Retrospective";
+import Todos from "./components/Todos/Todos";
+
+import styles from './App.module.css';
 
 function App() {
   return (
