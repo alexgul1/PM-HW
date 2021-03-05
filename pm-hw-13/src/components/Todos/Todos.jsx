@@ -1,9 +1,10 @@
 import React from 'react';
 import API from "../../config";
 import TodoItem from "./TodoItem/TodoItem";
-
-import style from './Todos.module.css'
 import SearchBox from "./SearchBox/SearchBox";
+import NewTodoForm from "./NewTodoForm/NewTodoForm";
+
+import styles from './Todos.module.css'
 
 
 class Todos extends React.Component {
@@ -16,11 +17,9 @@ class Todos extends React.Component {
       todos: []
     }
 
-    this.focusRef = React.createRef();
-
     this.getUserTodos = this.getUserTodos.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.createTodo = this.createTodo.bind(this);
   }
 
   getUserTodos() {
@@ -36,34 +35,14 @@ class Todos extends React.Component {
       this.getUserTodos);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    const {current} = this.focusRef;
-    current.focus();
-
-    if (current.value) {
-      const todo = {
-        userId: this.state.selectedUser,
-        title: current.value,
-        completed: false
-      }
-
-      API
-        .post(`/todos/`, todo)
-        .then(({data}) => {
-          this.setState((state) => ({
-            todos: [
-              ...state.todos,
-              data
-            ]
-          }))
-        })
-
-    }
-    current.value = "";
+  createTodo(data) {
+    this.setState((state) => ({
+      todos: [
+        ...state.todos,
+        data
+      ]
+    }))
   }
-
 
   componentDidMount() {
     API
@@ -72,8 +51,7 @@ class Todos extends React.Component {
         this.setState({
           users: data,
           selectedUser: data[0].id
-        });
-        this.getUserTodos();
+        }, this.getUserTodos);
       })
   }
 
@@ -81,18 +59,15 @@ class Todos extends React.Component {
     const {todos, users, selectedUser} = this.state;
 
     return (
-      <div className={style.container}>
-        <div className={style.actions}>
-          <select className={style.select} value={selectedUser} onChange={this.handleChange}>
+      <div className={styles.container}>
+        <div className={styles.actions}>
+          <select className={styles.select} value={selectedUser} onChange={this.handleChange}>
             {users.map((user) => <option value={user.id} key={user.id}>{user.name}</option>)}
           </select>
-          <form className={style.newTodo} onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Type new todo here" ref={this.focusRef}/>
-            <button>Add new todo</button>
-          </form>
+          <NewTodoForm userId={selectedUser} callback={this.createTodo}/>
           <SearchBox/>
         </div>
-        <div className={style.todoList}>
+        <div className={styles.todoList}>
           {todos.map((todo) => <TodoItem key={todo.id} {...todo}/>)}
         </div>
       </div>

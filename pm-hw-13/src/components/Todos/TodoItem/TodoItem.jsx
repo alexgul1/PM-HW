@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import withTodoItem from "./withTodoItem";
-import style from './TodoItem.module.css';
+import styles from './TodoItem.module.css';
 
 const propTypes = {
   id: PropTypes.number.isRequired,
@@ -13,14 +13,15 @@ const propTypes = {
 
 const TodoItem = ({id, title, completed, handleMark}) => {
   return (
-    <div className={style.item}>
+    <div className={styles.item}>
       <p className={classnames({
-        [style.title]: true,
-        [style.completed]: completed
+        [styles.title]: true,
+        [styles.completed]: completed
       })}>{id}. {title}</p>
+      {/*TODO Dont render button if is completed task*/}
       <button onClick={handleMark} className={classnames({
-          [style.button]: true,
-          [style.isHide]: completed
+          [styles.button]: true,
+          [styles.isHide]: completed
         }
       )}>&#10006;</button>
     </div>

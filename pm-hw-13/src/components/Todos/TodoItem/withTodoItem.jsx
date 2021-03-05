@@ -5,7 +5,7 @@ const withTodoItem = (Component) => {
   class WithTodoItem extends React.Component {
     constructor(props) {
       super(props);
-
+      /*TODO Rewrite with parent function*/
       this.state = {
         isCompleted: this.props.completed
       }
