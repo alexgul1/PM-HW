@@ -19,11 +19,11 @@ const TodoItem = ({id, title, completed, handleMark}) => {
         [styles.completed]: completed
       })}>{id}. {title}</p>
       {/*TODO Dont render button if is completed task*/}
-      <button onClick={handleMark} className={classnames({
+      {!completed && <button onClick={handleMark} className={classnames({
           [styles.button]: true,
           [styles.isHide]: completed
         }
-      )}>&#10006;</button>
+      )}>&#10006;</button>}
     </div>
   )
 }

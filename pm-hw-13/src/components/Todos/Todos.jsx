@@ -20,6 +20,7 @@ class Todos extends React.Component {
     this.getUserTodos = this.getUserTodos.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.createTodo = this.createTodo.bind(this);
+    this.markTodoAsComplete = this.markTodoAsComplete.bind(this);
   }
 
   getUserTodos() {
@@ -44,6 +45,15 @@ class Todos extends React.Component {
     }))
   }
 
+  markTodoAsComplete(id) {
+    this.setState(({todos}) => ({
+      todos: todos.map(todo => id === todo.id ? {
+        ...todo,
+        completed: true
+      } : todo)
+    }))
+  }
+
   componentDidMount() {
     API
       .get('/users')
@@ -57,18 +67,19 @@ class Todos extends React.Component {
 
   render() {
     const {todos, users, selectedUser} = this.state;
+    const {handleChange, createTodo, markTodoAsComplete} = this;
 
     return (
       <div className={styles.container}>
         <div className={styles.actions}>
-          <select className={styles.select} value={selectedUser} onChange={this.handleChange}>
+          <select className={styles.select} value={selectedUser} onChange={handleChange}>
             {users.map((user) => <option value={user.id} key={user.id}>{user.name}</option>)}
           </select>
-          <NewTodoForm userId={selectedUser} callback={this.createTodo}/>
+          <NewTodoForm userId={selectedUser} callback={createTodo}/>
           <SearchBox/>
         </div>
         <div className={styles.todoList}>
-          {todos.map((todo) => <TodoItem key={todo.id} {...todo}/>)}
+          {todos.map((todo) => <TodoItem key={todo.id} {...todo} callback={markTodoAsComplete}/>)}
         </div>
       </div>
     )

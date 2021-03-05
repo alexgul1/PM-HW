@@ -5,29 +5,23 @@ const withTodoItem = (Component) => {
   class WithTodoItem extends React.Component {
     constructor(props) {
       super(props);
-      /*TODO Rewrite with parent function*/
-      this.state = {
-        isCompleted: this.props.completed
-      }
 
       this.markAsComplete = this.markAsComplete.bind(this);
-
     }
 
     markAsComplete() {
-      const {id} = this.props;
+      const {id, callback} = this.props;
 
       API
-        .patch(`/posts/${id}`, {completed: true})
-        .then(({data}) => this.setState({isCompleted: data.completed}))
+        .patch(`/todos/${id}`, {completed: true})
+        .then(({data}) => callback(data.id))
     }
 
-
     render() {
-      const {id, title} = this.props;
-      const {isCompleted} = this.state;
+      const {id, title, completed} = this.props;
       const {markAsComplete} = this;
-      return <Component id={id} title={title} completed={isCompleted} handleMark={markAsComplete}/>
+
+      return <Component id={id} title={title} completed={completed} handleMark={markAsComplete}/>
     }
   }
 
