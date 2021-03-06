@@ -1,0 +1,14 @@
+.header {
+    font-size: 40px;
+}
+
+.logo {
+    border-radius: 5px;
+    width: 40px;
+}
+
+.board {
+    margin-top: 50px;
+    display: flex;
+    column-gap: 40px;
+}

@@ -1,0 +1,31 @@
+.container {
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
+    height: 100%;
+    width: 390px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.stats {
+    color: #b4b4b4;
+}
+
+.list {
+    padding: 20px;
+    background-color: #fafafb;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+
