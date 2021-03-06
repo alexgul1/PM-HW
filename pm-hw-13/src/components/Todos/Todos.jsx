@@ -1,6 +1,6 @@
 import React from 'react';
 
-import API from "../../config";
+import API from "../../utils/API";
 import TodoItem from "./TodoItem/TodoItem";
 import SearchBox from "./SearchBox/SearchBox";
 import NewTodoForm from "./NewTodoForm/NewTodoForm";

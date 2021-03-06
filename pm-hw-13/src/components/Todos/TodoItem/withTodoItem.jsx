@@ -1,6 +1,6 @@
 import React from 'react';
 
-import API from '../../../config';
+import API from '../../../utils/API';
 
 const withTodoItem = (Component) => {
   class WithTodoItem extends React.Component {

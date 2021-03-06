@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
 
-import API from '../../../config';
+import API from '../../../utils/API';
 
 import styles from "./NewTodoForm.module.css";
 
