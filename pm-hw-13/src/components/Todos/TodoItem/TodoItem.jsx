@@ -1,31 +1,41 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+
 import withTodoItem from "./withTodoItem";
+
 import styles from './TodoItem.module.css';
 
 const propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
-  handleMark: PropTypes.func.isRequired
+  handleMark: PropTypes.func.isRequired,
+  searchedText: PropTypes.string.isRequired
 }
 
-const TodoItem = ({id, title, completed, handleMark}) => {
+const TodoItem = ({title, completed, searchedText, handleMark}) => {
+  const createMarkup = () => {
+    if (!searchedText) {
+      return {__html: title};
+    }
+
+    const newTitle = title.replace(
+      new RegExp(searchedText, "gi"),
+      match => `<strong>${match}</strong>`
+    );
+
+    return {__html: newTitle};
+  }
+
   return (
     <div className={styles.item}>
       <p className={classnames({
         [styles.title]: true,
         [styles.completed]: completed
-      })}>{id}. {title}</p>
-      {/*TODO Dont render button if is completed task*/}
-      {!completed && <button onClick={handleMark} className={classnames({
-          [styles.button]: true,
-          [styles.isHide]: completed
-        }
-      )}>&#10006;</button>}
+      })} dangerouslySetInnerHTML={createMarkup()}/>
+      {!completed && <button onClick={handleMark} className={styles.button}>&#10006;</button>}
     </div>
-  )
+  );
 }
 
 TodoItem.propTypes = propTypes;

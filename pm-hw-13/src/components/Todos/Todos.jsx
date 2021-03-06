@@ -1,26 +1,28 @@
 import React from 'react';
+
 import API from "../../config";
 import TodoItem from "./TodoItem/TodoItem";
 import SearchBox from "./SearchBox/SearchBox";
 import NewTodoForm from "./NewTodoForm/NewTodoForm";
 
-import styles from './Todos.module.css'
-
+import styles from './Todos.module.css';
 
 class Todos extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedUser: undefined,
       users: [],
-      todos: []
+      todos: [],
+      searchedText: "",
+      selectedUser: undefined,
     }
 
     this.getUserTodos = this.getUserTodos.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.createTodo = this.createTodo.bind(this);
     this.markTodoAsComplete = this.markTodoAsComplete.bind(this);
+    this.updateTodoList = this.updateTodoList.bind(this);
   }
 
   getUserTodos() {
@@ -40,14 +42,21 @@ class Todos extends React.Component {
     this.setState((state) => ({
       todos: [
         ...state.todos,
-        data
+        {
+          ...data,
+          id: performance.now()
+        }
       ]
     }))
   }
 
+  updateTodoList(value) {
+    this.setState({searchedText: value});
+  }
+
   markTodoAsComplete(id) {
     this.setState(({todos}) => ({
-      todos: todos.map(todo => id === todo.id ? {
+      todos: todos.map((todo) => id === todo.id ? {
         ...todo,
         completed: true
       } : todo)
@@ -66,20 +75,21 @@ class Todos extends React.Component {
   }
 
   render() {
-    const {todos, users, selectedUser} = this.state;
-    const {handleChange, createTodo, markTodoAsComplete} = this;
+    const {todos, users, selectedUser, searchedText} = this.state;
+    const {handleChange, createTodo, markTodoAsComplete, updateTodoList} = this;
 
     return (
       <div className={styles.container}>
         <div className={styles.actions}>
           <select className={styles.select} value={selectedUser} onChange={handleChange}>
-            {users.map((user) => <option value={user.id} key={user.id}>{user.name}</option>)}
+            {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
           </select>
-          <NewTodoForm userId={selectedUser} callback={createTodo}/>
-          <SearchBox/>
+          <NewTodoForm userId={selectedUser} createTodo={createTodo}/>
+          <SearchBox updateTodoList={updateTodoList}/>
         </div>
         <div className={styles.todoList}>
-          {todos.map((todo) => <TodoItem key={todo.id} {...todo} callback={markTodoAsComplete}/>)}
+          {todos.map((todo) => <TodoItem key={todo.id} {...todo} searchedText={searchedText}
+                                         markTodoAsComplete={markTodoAsComplete}/>)}
         </div>
       </div>
     )

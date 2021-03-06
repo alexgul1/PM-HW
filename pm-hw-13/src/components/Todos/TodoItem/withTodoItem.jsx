@@ -1,27 +1,29 @@
 import React from 'react';
-import API from '../../../config'
+
+import API from '../../../config';
 
 const withTodoItem = (Component) => {
   class WithTodoItem extends React.Component {
     constructor(props) {
       super(props);
 
-      this.markAsComplete = this.markAsComplete.bind(this);
+      this.handleMark = this.handleMark.bind(this);
     }
 
-    markAsComplete() {
-      const {id, callback} = this.props;
+    handleMark() {
+      const {id, markTodoAsComplete} = this.props;
 
       API
-        .patch(`/todos/${id}`, {completed: true})
-        .then(({data}) => callback(data.id))
+        .patch(`/todos/${id}`, {id, completed: true})
+        .then(({data}) => markTodoAsComplete(data.id));
     }
 
     render() {
-      const {id, title, completed} = this.props;
-      const {markAsComplete} = this;
+      const {id, title, completed, searchedText} = this.props;
+      const {handleMark} = this;
 
-      return <Component id={id} title={title} completed={completed} handleMark={markAsComplete}/>
+      return <Component id={id} title={title} searchedText={searchedText}
+                        completed={completed} handleMark={handleMark}/>
     }
   }
 

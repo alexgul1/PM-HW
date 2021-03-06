@@ -1,14 +1,16 @@
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
+
 import API from '../../../config';
+
 import styles from "./NewTodoForm.module.css";
 
 const propTypes = {
   userId: PropTypes.number,
-  callback: PropTypes.func.isRequired
+  createTodo: PropTypes.func.isRequired
 }
 
-const NewTodoForm = ({userId, callback}) => {
+const NewTodoForm = ({userId, createTodo}) => {
   const inputRef = useRef(null);
 
   const handleSubmit = (event) => {
@@ -17,17 +19,19 @@ const NewTodoForm = ({userId, callback}) => {
     const {current} = inputRef;
     current.focus();
 
-    if(current.value) {
-      const newTodo = {
-        userId,
-        title: current.value,
-        completed: false
-      }
-
-      API
-        .post('/todos/', newTodo)
-        .then(({data}) => callback(data))
+    if (!current.value) {
+      return;
     }
+
+    const newTodo = {
+      userId,
+      title: current.value,
+      completed: false
+    }
+
+    API
+      .post('/todos/', newTodo)
+      .then(({data}) => createTodo(data))
 
     current.value = "";
   }
@@ -42,4 +46,4 @@ const NewTodoForm = ({userId, callback}) => {
 
 NewTodoForm.propTypes = propTypes;
 
-export default NewTodoForm
+export default NewTodoForm;

@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
-const SearchBox = () => {
+import styles from './SearchBox.module.css'
+
+const SearchBox = ({updateTodoList}) => {
+
+  const inputRef = useRef(null);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    inputRef.current.focus();
+  }
+
+  const changeHandler = ({target}) => {
+    updateTodoList(target.value)
+  }
+
   return (
-    <form>
-      <input type="text"/>
+    <form className={styles.searchBox} onSubmit={submitHandler}>
+      <input type="text" placeholder="Type here to search" onChange={changeHandler} ref={inputRef}/>
       <button>Search</button>
     </form>
   )
