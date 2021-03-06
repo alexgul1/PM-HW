@@ -14,8 +14,10 @@ function App() {
       <Menu/>
 
       <div className={styles.container}>
-        {/*TODO Add No Match and home pages*/}
         <Switch>
+          <Route exact path="/">
+            <h2>Home Page</h2>
+          </Route>
           <Route path="/weather">
             <WeeklyForecast />
           </Route>
@@ -25,7 +27,9 @@ function App() {
           <Route path="/todos">
             <Todos />
           </Route>
-
+          <Route path="*">
+            <h2>Page not found</h2>
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
