@@ -1,0 +1,8 @@
+.photoSection {
+    display: flex;
+    gap: 50px;
+}
+
+.link {
+    font-size: 18px;
+}
