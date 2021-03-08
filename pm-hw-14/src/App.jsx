@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import {Layout} from "antd";
 import styles from './App.module.css';
 import PhotoDetails from "./components/PhotoDetails/PhotoDetails";
-import Main from "./components/Main/Main";
+import Main from "./components/Photos/Photos";
 import Album from "./components/Album/Album";
 
 function App() {

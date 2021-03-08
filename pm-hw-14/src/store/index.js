@@ -1,7 +1,13 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 
-const rootReducer = combineReducers({});
+import photoDetails from "../ducks/photoDetails";
+import photos from "../ducks/photos";
+
+const rootReducer = combineReducers({
+  photoDetails,
+  photos
+});
 
 const composeEnhancers =
   typeof window === 'object' &&

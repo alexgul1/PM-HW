@@ -3,14 +3,14 @@ import {Card} from 'antd';
 
 import styles from './PhotoPreview.module.css'
 
-const PhotoPreview = () => {
+const PhotoPreview = ({title, url}) => {
   return (
     <Card
       className={styles.img}
       hoverable
-      cover={<img src="https://via.placeholder.com/150/92c952"  alt={'example'}/>}
+      cover={<img src={url} alt={'example'}/>}
     >
-      <Card.Meta title={'reprehenderit est deserunt velit ipsam'}/>
+      <Card.Meta title={title}/>
     </Card>
   )
 }

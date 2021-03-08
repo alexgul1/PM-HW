@@ -2,7 +2,7 @@ import React from 'react';
 
 import PhotoPreview from "../PhotoPreview/PhotoPreview";
 import {Button, Col, Empty, Row, Skeleton, Typography} from "antd";
-import styles from "../Main/Main.module.css";
+import styles from "./Album.module.css";
 
 const Album = () => {
   return (
