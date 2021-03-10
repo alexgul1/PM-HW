@@ -5,6 +5,11 @@ const RECEIVED = 'photo_gallery/photo_previews/received';
 const ADD_LOAD_REQUESTED = 'photo_gallery/photo_previews/add_load_requested';
 const ADD_LOAD_RECEIVED = 'photo_gallery/photo_previews/add_load_received';
 const ALL_UPLOADED = 'photo_gallery/photo_previews/all_uploaded';
+const CLEANED = 'photo_gallery/user/user_stats_cleaned';
+
+
+/*TODO  clear store(reset to initial) when move out from page*/
+
 
 const requested = () => ({
   type: REQUESTED
@@ -28,6 +33,10 @@ const allUploaded = () => ({
   type: ALL_UPLOADED
 })
 
+export const cleaned = () => ({
+  type: CLEANED
+})
+
 export const loadPhotos = (albumId) => (dispatch) => {
   dispatch(requested());
 
@@ -36,6 +45,7 @@ export const loadPhotos = (albumId) => (dispatch) => {
     url += `&albumId=${albumId}`;
   }
 
+  /*TODO added handler on non-existing album*/
   API
     .get(url)
     .then(({data}) => dispatch(received(data)));
@@ -72,7 +82,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        isAllUploaded: false,
       }
     case ADD_LOAD_REQUESTED: {
       return {
@@ -105,6 +114,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         isAllUploaded: true
       }
+    case CLEANED:
+      return initialState;
     default:
       return state;
   }

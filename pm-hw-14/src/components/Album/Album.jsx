@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {BeatLoader} from "react-spinners";
 
 import selector from "./UserInfo.selector";
-import {loadUserInfo} from "../../ducks/user";
+import {cleaned, loadUserInfo} from "../../ducks/user";
 import PhotoPreviews from "../PreviewsList/PreviewsList";
 
 import styles from './Album.module.css';
@@ -16,8 +16,11 @@ const Album = () => {
 
   const {isLoading, data} = useSelector(selector);
 
+  /*TODO added hook on unmount*/
   useEffect(() => {
     dispatch(loadUserInfo(id))
+
+    return () => dispatch(cleaned());
   }, [])
 
   return (

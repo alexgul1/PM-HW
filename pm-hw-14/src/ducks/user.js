@@ -1,7 +1,8 @@
 import API from "../utils/API";
 
-const REQUESTED = 'photo_gallery/album/user_stats_requested';
-const RECEIVED = 'photo_gallery/album/user_stats_received';
+const REQUESTED = 'photo_gallery/user/user_stats_requested';
+const RECEIVED = 'photo_gallery/user/user_stats_received';
+const CLEANED = 'photo_gallery/user/user_stats_cleaned';
 
 const requested = () => ({
   type: REQUESTED
@@ -10,16 +11,20 @@ const requested = () => ({
 const received = (data) => ({
   type: RECEIVED,
   payload: data
+});
+
+export const cleaned = () => ({
+  type: CLEANED
 })
 
+/*TODO added handler on non-existing album*/
 export const loadUserInfo = (albumId) => (dispatch) => {
   dispatch(requested());
 
   API
     .get(`/albums/${albumId}?_expand=user`)
-    .then(({data}) => dispatch(received(data)))
+    .then(({data}) => dispatch(received(data)));
 }
-
 
 const initialState = {
   isLoading: false,
@@ -31,21 +36,23 @@ const reducer = (state = initialState, action) => {
     case REQUESTED:
       return {
         ...state,
-        isUserStatsLoading: true
-      }
+        isLoading: true
+      };
     case RECEIVED:
       const {user: { name, username }} = action.payload;
 
       return {
         ...state,
-        isUserStatsLoading: false,
+        isLoading: false,
         data: {
           name,
           username
         }
-      }
+      };
+    case CLEANED:
+      return initialState;
     default:
-      return state
+      return state;
   }
 }
 

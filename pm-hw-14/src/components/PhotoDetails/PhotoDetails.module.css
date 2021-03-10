@@ -39,7 +39,12 @@
 }
 
 .link {
-    font-size: 18px;
+    text-decoration: none;
+    color: #1890ff;
+}
+
+.link:hover {
+    color: #1765ad;
 }
 
 .loader {

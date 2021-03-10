@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {BeatLoader} from "react-spinners";
 
 import selector from "./PhotoDetails.selector";
-import {loadDetails} from "../../ducks/photoDetails";
+import {cleaned, loadDetails} from "../../ducks/photoDetails";
 
 import styles from './PhotoDetails.module.css'
 
@@ -12,10 +12,14 @@ import styles from './PhotoDetails.module.css'
 const PhotoDetails = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
-  const {isLoading, data} = useSelector(selector)
+  const {isLoading, data} = useSelector(selector);
 
+
+  /*TODO added hook on unmount*/
   useEffect(() => {
-    dispatch(loadDetails(id))
+    dispatch(loadDetails(id));
+
+    return () => dispatch(cleaned());
   }, [])
 
   return (
@@ -44,7 +48,7 @@ const PhotoDetails = () => {
           <div className={styles.detail}>
             <div className={styles.desc}>Album</div>
             <div className={styles.value}>
-              <Link to={`/album/${data.albumId}`}>{data.albumTitle}</Link>
+              <Link className={styles.link} to={`/album/${data.albumId}`}>{data.albumTitle}</Link>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import API from "../utils/API";
 
 const REQUESTED = 'photo_gallery/photo_details/requested';
 const RECEIVED = 'photo_gallery/photo_details/received';
+const CLEANED = 'photo_gallery/photo_details/user_stats_cleaned';
 
 const requested = () => ({
   type: REQUESTED
@@ -12,6 +13,11 @@ const received = (data) => ({
   payload: data
 })
 
+export const cleaned = () => ({
+  type: CLEANED
+})
+
+/*TODO added handler on non-existing photos*/
 export const loadDetails = (id) => (dispatch) => {
   dispatch(requested());
 
@@ -45,6 +51,8 @@ const reducer = (state = initialState, action) => {
           albumTitle
         }
       }
+    case CLEANED:
+      return initialState;
     default:
       return state;
   }

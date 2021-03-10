@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {BeatLoader, ClipLoader} from "react-spinners";
 
 import selector from "./PreviewsList.selector";
-import {additionalLoadPhoto, loadPhotos} from "../../ducks/previewsList";
+import {additionalLoadPhoto, loadPhotos, cleaned} from "../../ducks/previewsList";
 import PhotoPreview from "../PhotoPreview/PhotoPreview";
 
 import styles from "./PreviewsList.module.css";
@@ -23,6 +23,8 @@ const PreviewsList = ({albumId}) => {
 
   useEffect(() => {
     dispatch(loadPhotos(albumId))
+
+    return () => dispatch(cleaned())
   }, [])
 
   return (
