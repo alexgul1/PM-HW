@@ -3,7 +3,7 @@ import {Skeleton, Typography} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
-import selector from "./Album.selector";
+import selector from "./UserInfo.selector";
 import PhotoPreviews from "../PhotoPreviews/PhotoPreviews";
 import {loadUserInfo} from "../../ducks/user";
 
