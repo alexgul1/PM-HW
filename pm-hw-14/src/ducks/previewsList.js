@@ -1,10 +1,10 @@
 import API from "../utils/API";
 
-const REQUESTED = 'album_explorer/photo_previews/requested';
-const RECEIVED = 'album_explorer/photo_previews/received';
-const ADD_LOAD_REQUESTED = 'album_explorer/photo_previews/add_load_requested';
-const ADD_LOAD_RECEIVED = 'album_explorer/photo_previews/add_load_received';
-const ALL_UPLOADED = 'album_explorer/photo_previews/all_uploaded';
+const REQUESTED = 'photo_gallery/photo_previews/requested';
+const RECEIVED = 'photo_gallery/photo_previews/received';
+const ADD_LOAD_REQUESTED = 'photo_gallery/photo_previews/add_load_requested';
+const ADD_LOAD_RECEIVED = 'photo_gallery/photo_previews/add_load_received';
+const ALL_UPLOADED = 'photo_gallery/photo_previews/all_uploaded';
 
 const requested = () => ({
   type: REQUESTED

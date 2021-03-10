@@ -1,7 +1,7 @@
 import API from "../utils/API";
 
-const REQUESTED = 'album_explorer/photo_details/requested';
-const RECEIVED = 'album_explorer/photo_details/received';
+const REQUESTED = 'photo_gallery/photo_details/requested';
+const RECEIVED = 'photo_gallery/photo_details/received';
 
 const requested = () => ({
   type: REQUESTED
