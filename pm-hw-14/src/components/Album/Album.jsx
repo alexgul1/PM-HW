@@ -34,7 +34,7 @@ const Album = () => {
             <span className={styles.username}>{data.username}</span>
           </h2>
         </div>
-        <PhotoPreviews/>
+        <PhotoPreviews albumId={id}/>
       </React.Fragment>
       }
     </React.Fragment>

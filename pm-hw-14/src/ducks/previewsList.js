@@ -26,7 +26,7 @@ const addLoadReceived = (data) => ({
 export const loadPhotos = (albumId) => (dispatch) => {
   dispatch(requested());
 
-  let url = '/photos?_page=1&_limit=6';
+  let url = '/photos?_page=1&_limit=100';
   if(albumId !== undefined) {
     url += `&albumId=${albumId}`;
   }
@@ -39,7 +39,7 @@ export const loadPhotos = (albumId) => (dispatch) => {
 export const additionalLoadPhoto = (page, albumId) => (dispatch) => {
   dispatch(addLoadRequested());
 
-  let url = `/photos?_page=${page}&_limit=6`;
+  let url = `/photos?_page=${page}&_limit=100`;
   if(albumId !== undefined) {
     url += `&albumId=${albumId}`;
   }
