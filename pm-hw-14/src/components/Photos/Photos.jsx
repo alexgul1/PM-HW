@@ -1,7 +1,7 @@
 import React from 'react';
 import {Typography} from 'antd';
 
-import PhotoPreviews from "../PhotoPreviews/PhotoPreviews";
+import PhotoPreviews from "../PreviewsList/PreviewsList";
 
 const Photos = () => {
 

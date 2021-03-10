@@ -1,3 +1,38 @@
+.singleBlock {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    justify-content: center;
+}
+
+.workDesc {
+    background-color: #ffffff;
+    padding: 30px;
+    letter-spacing: 1px;
+    max-width: 300px;
+}
+
+.detail {
+    margin-bottom: 10px;
+}
+
+.detail .desc {
+    color: #181818;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.detail .value {
+    color: #999999;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.workImg {
+
+}
+
 .photoSection {
     display: flex;
     gap: 50px;

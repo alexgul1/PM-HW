@@ -1,10 +1,18 @@
-.container {
-    max-width: 768px;
-    margin: 0 auto 30px;
+.userInfo {
+    width: 100%;
+    text-align: center;
+    color: #181818;
+    margin-bottom: 50px;
 }
 
-.button {
-    width: 200px;
-    margin: 0 auto 20px;
+.name {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.username {
     display: block;
+    font-size: 18px;
+    font-weight: 400;
 }

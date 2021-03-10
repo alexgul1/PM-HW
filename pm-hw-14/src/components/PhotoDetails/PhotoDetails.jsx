@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {Empty, Skeleton, Typography} from "antd";
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -11,7 +10,7 @@ import styles from './PhotoDetails.module.css'
 
 const PhotoDetails = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const {id} = useParams();
   const {isLoading, data} = useSelector(selector)
 
   useEffect(() => {
@@ -19,6 +18,39 @@ const PhotoDetails = () => {
   }, [])
 
   return (
+    <React.Fragment>
+      {data &&
+      <React.Fragment>
+        <div className={styles.singleBlock}>
+          <div className={styles.workDesc}>
+            <div className={styles.detail}>
+              <div className={styles.desc}>Photo ID</div>
+              <div className={styles.value}>{data.id}</div>
+            </div>
+            <div className={styles.detail}>
+              <div className={styles.desc}>Title</div>
+              <div className={styles.value}>{data.title}</div>
+            </div>
+            <div className={styles.detail}>
+              <div className={styles.desc}>Album ID</div>
+              <div className={styles.value}>{data.albumId}</div>
+            </div>
+            <div className={styles.detail}>
+              <div className={styles.desc}>Album</div>
+              <div className={styles.value}>
+                <Link to={`/album/${data.albumId}`}>{data.albumTitle}</Link>
+              </div>
+            </div>
+          </div>
+          <div className={styles.workImg}>
+            <img src={data.url} alt={data.id}/>
+          </div>
+        </div>
+      </React.Fragment>}
+    </React.Fragment>
+  )
+
+  /*return (
     <React.Fragment>
       <Typography.Title level={2}>Single Photo</Typography.Title>
       {isLoading && <Skeleton active/>}
@@ -35,7 +67,7 @@ const PhotoDetails = () => {
         </div>}
 
     </React.Fragment>
-  )
+  )*/
 };
 
 export default PhotoDetails;

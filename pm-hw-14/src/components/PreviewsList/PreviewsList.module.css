@@ -1,0 +1,35 @@
+.container {
+    max-width: 768px;
+    margin: 0 auto 30px;
+}
+
+.list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.btnBlock {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.loadMore {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #181818;
+    color: #181818;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.loadMore:disabled {
+    cursor: default;
+}
+
+

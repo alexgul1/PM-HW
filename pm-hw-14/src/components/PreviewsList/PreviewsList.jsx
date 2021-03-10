@@ -1,14 +1,13 @@
-import {Button, Col, Row, Skeleton} from "antd";
 import React, {useEffect, useState} from "react";
-import styles from "./PhotoPreviews.module.css";
+import styles from "./PreviewsList.module.css";
 import {Link} from "react-router-dom";
 import PhotoPreview from "../PhotoPreview/PhotoPreview";
 import {useDispatch, useSelector} from "react-redux";
-import selector from "./PhotoPreviews.selector";
+import selector from "./PreviewsList.selector";
 import {additionalLoadPhoto, loadPhotos} from "../../ducks/photoPreviews";
 
 
-const PhotoPreviews = ({albumId}) => {
+const PreviewsList = ({albumId}) => {
   const [pagination, setPagination] = useState(2);
 
   const dispatch = useDispatch();
@@ -25,26 +24,26 @@ const PhotoPreviews = ({albumId}) => {
 
   return (
     <React.Fragment>
-      {isLoading && <Skeleton active />}
-      {!isLoading && data &&
+      {data &&
       <React.Fragment>
         <div className={styles.container}>
-          <Row justify="space-around" gutter={[16, 16]}>
+          <div className={styles.list}>
             {data.map(({id, title, url}) => {
               return (
-                <Col key={id} span={8}>
-                  <Link to={`/photo/${id}`}>
-                    <PhotoPreview title={title} url={url}/>
-                  </Link>
-                </Col>)
+                <Link to={`/photo/${id}`} key={id} >
+                  <PhotoPreview title={title} url={url}/>
+                </Link>)
             })}
-          </Row>
-        </div>
-        <Button className={styles.button} type={'default'} loading={isAddLoading} onClick={onClick}>Load more</Button>
-      </React.Fragment>}
-    </React.Fragment>
+          </div>
+          <div className={styles.btnBlock}>
+            <button className={styles.loadMore} onClick={onClick} disabled={isAddLoading}>Load more photos</button>
+          </div>
 
+        </div>
+      </React.Fragment>
+      }
+    </React.Fragment>
   )
 }
 
-export default PhotoPreviews;
+export default PreviewsList;
