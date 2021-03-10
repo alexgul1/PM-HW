@@ -1,9 +1,9 @@
 import API from "../utils/API";
 
-const REQUESTED = 'album_explorer/photos/requested';
-const RECEIVED = 'album_explorer/photos/received';
-const ADD_LOAD_REQUESTED = 'album_explorer/photos/add_load_requested';
-const ADD_LOAD_RECEIVED = 'album_explorer/photos/add_load_received';
+const REQUESTED = 'album_explorer/photo_previews/requested';
+const RECEIVED = 'album_explorer/photo_previews/received';
+const ADD_LOAD_REQUESTED = 'album_explorer/photo_previews/add_load_requested';
+const ADD_LOAD_RECEIVED = 'album_explorer/photo_previews/add_load_received';
 
 const requested = () => ({
   type: REQUESTED
@@ -23,19 +23,29 @@ const addLoadReceived = (data) => ({
   payload: data
 });
 
-export const loadPhotos = () => (dispatch) => {
+export const loadPhotos = (albumId) => (dispatch) => {
   dispatch(requested());
 
+  let url = '/photos?_page=1&_limit=6';
+  if(albumId !== undefined) {
+    url += `&albumId=${albumId}`;
+  }
+
   API
-    .get('/photos?_page=1&_limit=6')
+    .get(url)
     .then(({data}) => dispatch(received(data)));
 }
 
-export const additionalLoadPhoto = (page) => (dispatch) => {
+export const additionalLoadPhoto = (page, albumId) => (dispatch) => {
   dispatch(addLoadRequested());
 
+  let url = `/photos?_page=${page}&_limit=6`;
+  if(albumId !== undefined) {
+    url += `&albumId=${albumId}`;
+  }
+
   API
-    .get(`/photos?_page=${page}&_limit=6`)
+    .get(url)
     .then(({data}) => dispatch(addLoadReceived(data)));
 }
 

@@ -2,11 +2,13 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 
 import photoDetails from "../ducks/photoDetails";
-import photos from "../ducks/photos";
+import photos from "../ducks/photoPreviews";
+import user from "../ducks/user";
 
 const rootReducer = combineReducers({
   photoDetails,
-  photos
+  photos,
+  user
 });
 
 const composeEnhancers =

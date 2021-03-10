@@ -1,47 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {Skeleton, Typography} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 
-import PhotoPreview from "../PhotoPreview/PhotoPreview";
-import {Button, Col, Empty, Row, Skeleton, Typography} from "antd";
-import styles from "./Album.module.css";
+import selector from "./Album.selector";
+import PhotoPreviews from "../PhotoPreviews/PhotoPreviews";
+import {loadUserInfo} from "../../ducks/user";
+
 
 const Album = () => {
+  const dispatch = useDispatch();
+  const {id} = useParams()
+
+  const {isLoading, data} = useSelector(selector);
+
+  useEffect(() => {
+    dispatch(loadUserInfo(id))
+  }, [])
+
   return (
     <React.Fragment>
       <Typography.Title level={2}>Album section</Typography.Title>
-      <Skeleton active={true}/>
-      <Empty description={'Album with id 1 not found'}/>
-      <Typography.Title level={3}>Leanne Graham - Bret</Typography.Title>
+      {isLoading && <Skeleton active={true}/>}
+      {!isLoading && data &&
+      <Typography.Title level={3}>{data.name} - {data.username}</Typography.Title>}
 
-      <div className={styles.container}>
-        <Row justify="space-around" gutter={[16, 16]}>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col >
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col >
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-          <Col span={8}>
-            <PhotoPreview />
-          </Col>
-        </Row>
-      </div>
-      <Button className={styles.button} type={'default'} loading={false}>Load more</Button>
-
+      <PhotoPreviews albumId={id}/>
     </React.Fragment>
   )
 };
