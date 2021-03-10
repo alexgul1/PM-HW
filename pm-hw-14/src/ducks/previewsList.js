@@ -5,11 +5,7 @@ const RECEIVED = 'photo_gallery/photo_previews/received';
 const ADD_LOAD_REQUESTED = 'photo_gallery/photo_previews/add_load_requested';
 const ADD_LOAD_RECEIVED = 'photo_gallery/photo_previews/add_load_received';
 const ALL_UPLOADED = 'photo_gallery/photo_previews/all_uploaded';
-const CLEANED = 'photo_gallery/user/user_stats_cleaned';
-
-
-/*TODO  clear store(reset to initial) when move out from page*/
-
+const CLEANED = 'photo_gallery/photo_previews/cleaned';
 
 const requested = () => ({
   type: REQUESTED
@@ -45,10 +41,9 @@ export const loadPhotos = (albumId) => (dispatch) => {
     url += `&albumId=${albumId}`;
   }
 
-  /*TODO added handler on non-existing album*/
   API
     .get(url)
-    .then(({data}) => dispatch(received(data)));
+    .then(({data}) => dispatch(received(data)))
 }
 
 export const additionalLoadPhoto = (page, albumId) => (dispatch) => {

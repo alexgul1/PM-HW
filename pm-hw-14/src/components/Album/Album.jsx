@@ -16,7 +16,6 @@ const Album = () => {
 
   const {isLoading, data} = useSelector(selector);
 
-  /*TODO added hook on unmount*/
   useEffect(() => {
     dispatch(loadUserInfo(id))
 
@@ -30,7 +29,12 @@ const Album = () => {
         <BeatLoader loading={isLoading}/>
       </div>
       }
-      {!isLoading && data &&
+
+      {!isLoading && Object.keys(data).length === 0 &&
+      <h2 className={styles.notFound}>Album with id {id} not found</h2>
+      }
+
+      {!isLoading && Object.keys(data).length > 0 &&
       <React.Fragment>
         <div className={styles.userInfo}>
           <h2 className={styles.name}>{data.name}

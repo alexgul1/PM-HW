@@ -14,8 +14,6 @@ const PhotoDetails = () => {
   const {id} = useParams();
   const {isLoading, data} = useSelector(selector);
 
-
-  /*TODO added hook on unmount*/
   useEffect(() => {
     dispatch(loadDetails(id));
 
@@ -29,8 +27,10 @@ const PhotoDetails = () => {
         <BeatLoader loading={isLoading}/>
       </div>
       }
-
-      {!isLoading && data &&
+      {!isLoading && Object.keys(data).length === 0 &&
+        <h2 className={styles.notFound}>Photo with id {id} not found</h2>
+      }
+      {!isLoading && Object.keys(data).length > 0 &&
       <div className={styles.singleBlock}>
         <div className={styles.workDesc}>
           <div className={styles.detail}>

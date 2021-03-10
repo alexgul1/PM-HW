@@ -35,7 +35,7 @@ const PreviewsList = ({albumId}) => {
       </div>
       }
 
-      {!isLoading && data &&
+      {!isLoading && data.length > 0 &&
       <div className={styles.container}>
         <div className={styles.list}>
           {data.map(({id, title, url}) => {
