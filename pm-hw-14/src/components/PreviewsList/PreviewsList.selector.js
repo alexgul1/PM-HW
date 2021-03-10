@@ -1,6 +1,6 @@
 import {createSelector, createStructuredSelector} from "reselect";
 
-const PreviewsListSelector = (state) => state.photos;
+const PreviewsListSelector = (state) => state.previewsList;
 
 const isLoadingSelector = createSelector(
   PreviewsListSelector,

@@ -1,13 +1,16 @@
 import React from 'react';
-import {Typography} from 'antd';
 
 import PhotoPreviews from "../PreviewsList/PreviewsList";
+
+import styles from "./Photos.module.css"
 
 const Photos = () => {
 
   return (
     <React.Fragment>
-      <Typography.Title level={2}>Photos</Typography.Title>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Photo Gallery</h2>
+      </div>
       <PhotoPreviews />
     </React.Fragment>
   )

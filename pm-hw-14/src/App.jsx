@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Layout>
         <Layout.Header>
-          <Link to="/"><h1 className={styles.header}>Album explorer</h1></Link>
+          <Link to="/"><h1 className={styles.header}>Photo Gallery</h1></Link>
         </Layout.Header>
         <Layout.Content className={styles.container}>
           <Switch>
