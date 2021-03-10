@@ -4,6 +4,7 @@ const REQUESTED = 'album_explorer/photo_previews/requested';
 const RECEIVED = 'album_explorer/photo_previews/received';
 const ADD_LOAD_REQUESTED = 'album_explorer/photo_previews/add_load_requested';
 const ADD_LOAD_RECEIVED = 'album_explorer/photo_previews/add_load_received';
+const ALL_UPLOADED = 'album_explorer/photo_previews/all_uploaded';
 
 const requested = () => ({
   type: REQUESTED
@@ -23,11 +24,15 @@ const addLoadReceived = (data) => ({
   payload: data
 });
 
+const allUploaded = () => ({
+  type: ALL_UPLOADED
+})
+
 export const loadPhotos = (albumId) => (dispatch) => {
   dispatch(requested());
 
-  let url = '/photos?_page=1&_limit=100';
-  if(albumId !== undefined) {
+  let url = '/photos?_page=1&_limit=6';
+  if (albumId !== undefined) {
     url += `&albumId=${albumId}`;
   }
 
@@ -39,19 +44,25 @@ export const loadPhotos = (albumId) => (dispatch) => {
 export const additionalLoadPhoto = (page, albumId) => (dispatch) => {
   dispatch(addLoadRequested());
 
-  let url = `/photos?_page=${page}&_limit=100`;
-  if(albumId !== undefined) {
+  let url = `/photos?_page=${page}&_limit=6`;
+  if (albumId !== undefined) {
     url += `&albumId=${albumId}`;
   }
 
   API
     .get(url)
-    .then(({data}) => dispatch(addLoadReceived(data)));
+    .then(({data}) => {
+      if (data.length === 0) {
+        dispatch(allUploaded())
+      }
+      dispatch(addLoadReceived(data))
+    });
 }
 
 const initialState = {
   isLoading: false,
   isAddLoading: false,
+  isAllUploaded: false,
   data: []
 }
 
@@ -60,7 +71,8 @@ const reducer = (state = initialState, action) => {
     case REQUESTED:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        isAllUploaded: false,
       }
     case ADD_LOAD_REQUESTED: {
       return {
@@ -88,6 +100,11 @@ const reducer = (state = initialState, action) => {
         ]
       }
     }
+    case ALL_UPLOADED:
+      return {
+        ...state,
+        isAllUploaded: true
+      }
     default:
       return state;
   }

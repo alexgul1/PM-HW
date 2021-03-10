@@ -14,7 +14,7 @@ const PreviewsList = ({albumId}) => {
   const [pagination, setPagination] = useState(2);
 
   const dispatch = useDispatch();
-  const {isLoading, isAddLoading, data} = useSelector(selector)
+  const {isLoading, isAddLoading, isAllUploaded, data} = useSelector(selector)
 
   const loadMore = () => {
     dispatch(additionalLoadPhoto(pagination, albumId));
@@ -46,14 +46,15 @@ const PreviewsList = ({albumId}) => {
         <div className={styles.loader}>
           <ClipLoader loading={isAddLoading}/>
         </div>
+        {!isAllUploaded &&
         <div className={styles.btnBlock}>
           <button className={styles.loadMore} onClick={loadMore} disabled={isAddLoading}>Load more photos</button>
-        </div>
+        </div>}
 
       </div>
       }
     </React.Fragment>
   )
-}
+};
 
 export default PreviewsList;

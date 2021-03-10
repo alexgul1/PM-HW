@@ -12,6 +12,11 @@ const isAddLoadingSelector = createSelector(
   ({isAddLoading}) => isAddLoading
 )
 
+const isAllUploadedSelector = createSelector(
+  PreviewsListSelector,
+  ({isAllUploaded}) => isAllUploaded
+)
+
 const dataSelector = createSelector(
   PreviewsListSelector,
   ({data}) => data
@@ -20,6 +25,7 @@ const dataSelector = createSelector(
 const selector = createStructuredSelector({
   isLoading: isLoadingSelector,
   isAddLoading: isAddLoadingSelector,
+  isAllUploaded: isAllUploadedSelector,
   data: dataSelector
 });
 
