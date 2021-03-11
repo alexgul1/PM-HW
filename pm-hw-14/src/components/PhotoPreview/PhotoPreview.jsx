@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './PhotoPreview.module.css'
 
@@ -11,6 +12,11 @@ const PhotoPreview = ({title, url}) => {
       </p>
     </div>
   )
+}
+
+PhotoPreview.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 }
 
 export default PhotoPreview;

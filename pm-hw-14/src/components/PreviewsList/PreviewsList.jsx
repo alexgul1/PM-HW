@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {BeatLoader, ClipLoader} from "react-spinners";
@@ -58,5 +59,9 @@ const PreviewsList = ({albumId}) => {
     </React.Fragment>
   )
 };
+
+PreviewsList.propTypes = {
+  albumId: PropTypes.number,
+}
 
 export default PreviewsList;
