@@ -61,7 +61,7 @@ const PreviewsList = ({albumId}) => {
 };
 
 PreviewsList.propTypes = {
-  albumId: PropTypes.number,
+  albumId: PropTypes.string,
 }
 
 export default PreviewsList;
