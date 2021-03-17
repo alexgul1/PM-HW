@@ -1,15 +1,21 @@
 import React from "react";
 import {Formik, Field, Form} from "formik";
 import classNames from 'classnames';
+import {useDispatch, useSelector} from "react-redux";
 
-import styles from '../UserForm/UserForm.module.css';
 import FieldBox from "../FieldBox/FieldBox";
 import UserDetailsSchema from "./UserDetailsSchema";
+import selector from "./UserDetails.selector";
 
+import styles from '../UserForm/UserForm.module.css';
+import {setInfo} from "../../ducks/info";
 
 const UserDetailsForm = ({nextStep}) => {
+  const dispatch = useDispatch();
+  const info = useSelector(selector)
+
   const onSubmit = (values) => {
-    console.log(values)
+    dispatch(setInfo(values))
     nextStep();
   }
 
@@ -18,13 +24,7 @@ const UserDetailsForm = ({nextStep}) => {
       <h1 className={styles.title}>User details</h1>
       <div className={styles.formContainer}>
         <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            position: '',
-            phone: '',
-            email: ''
-          }}
+          initialValues={info}
           validationSchema={UserDetailsSchema}
           onSubmit={onSubmit}>
           {({values, errors, touched}) => (

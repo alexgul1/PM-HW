@@ -1,15 +1,21 @@
 import React from "react";
-import {Field, FieldArray, Form, Formik, getIn} from "formik";
+import {FieldArray, Form, Formik, getIn} from "formik";
 import classNames from 'classnames';
 
 import styles from '../UserForm/UserForm.module.css';
 import UserEducationSchema from "./UserEducationSchema";
 import UserEducation from "./UserEducation";
 import FieldBox from "../FieldBox/FieldBox";
+import {useDispatch, useSelector} from "react-redux";
+import selector from "./UserEducation.selector";
+import {setEducation} from "../../ducks/education";
 
 const UserEducationForm = ({nextStep, prevStep}) => {
+  const dispatch = useDispatch();
+  const educations = useSelector(selector);
+
   const onSubmit = (values) => {
-    console.log(values)
+    dispatch(setEducation(values))
     nextStep();
   }
 
@@ -18,14 +24,7 @@ const UserEducationForm = ({nextStep, prevStep}) => {
       <h1 className={styles.title}>User Education</h1>
       <Formik
         initialValues={{
-          schools: [
-            {
-              school: '',
-              speciality: '',
-              startDate: '',
-              endDate: ''
-            }
-          ]
+          schools: educations
         }}
         validationSchema={UserEducationSchema}
         onSubmit={onSubmit}>
@@ -53,7 +52,7 @@ const UserEducationForm = ({nextStep, prevStep}) => {
                                   isTouched={getIn(touched, `schools[${index}].startDate`)}/>
 
                         <FieldBox name={`schools.${index}.endDate`} value={values.schools[index].endDate} type="date"
-                                  label="Start Date" error={getIn(errors, `schools[${index}].endDate`)}
+                                  label="End Date" error={getIn(errors, `schools[${index}].endDate`)}
                                   isTouched={getIn(touched, `schools[${index}].endDate`)}/>
 
                         <button type="button" className={classNames(styles.btn, styles.removeBtn)}

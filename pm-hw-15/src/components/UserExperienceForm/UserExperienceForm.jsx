@@ -8,12 +8,17 @@ import FieldBox from "../FieldBox/FieldBox";
 
 import UserExperienceSchema from "./UserExperienceSchema";
 import UserExperience from "./UserExperience";
+import {useDispatch, useSelector} from "react-redux";
+import selector from "./UserExperience.selector";
+import {setExperience} from "../../ducks/experience";
 
 const UserExperienceForm = ({prevStep}) => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const experiences = useSelector(selector);
 
   const onSubmit = (values) => {
-    console.log(values);
+    dispatch(setExperience(values));
     history.push('/resume');
   }
 
@@ -22,14 +27,7 @@ const UserExperienceForm = ({prevStep}) => {
       <h1 className={styles.title}>User Experience</h1>
       <Formik
         initialValues={{
-          companies: [
-            {
-              position: '',
-              company: '',
-              startDate: '',
-              endDate: '',
-            }
-          ]
+          companies: experiences
         }}
         validationSchema={UserExperienceSchema}
         onSubmit={onSubmit}>
