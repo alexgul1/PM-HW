@@ -1,0 +1,105 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0 8px -3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    word-break: break-word;
+}
+
+.text {
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    font-size: 16px;
+    padding: 15px;
+    column-gap: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: aquamarine;
+    padding: 10px 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.info p {
+    font-weight: bold;
+    color: white;
+}
+
+.edit-btn {
+    display: block;
+    align-self: flex-start;
+    border: none;
+    background: none;
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+}
+
+.votes {
+    display: flex;
+    column-gap: 10px;
+    color: white;
+    user-select: none;
+}
+
+.vote-btn {
+    background: inherit;
+    outline: none;
+    border: none;
+    color: inherit;
+}
+
+.vote-btn:hover {
+    cursor: pointer;
+}
+
+.downvote:hover {
+    color: #5a75cc;
+}
+
+.upvote:hover {
+    color: #cc3700;
+}
+
+.rating {
+    text-align: center;
+    font-size: 17px;
+    width: 30px;
+}
+
+
+.update-box {
+    background-color: white;
+    box-shadow: 0 0 8px -3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.update-textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 17px;
+    height: 70px;
+    resize: none;
+    overflow: scroll;
+    padding: 10px;
+    border: none;
+}
+
+.hints-box {
+    background: #f8f9fa;
+    padding: 10px;
+}
+
+.hint {
+    display: inline-block;
+    background: #eff2f4;
+    padding: 0 5px;
+    border-radius: 5px;
+}
