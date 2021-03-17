@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>PM-HW-5</title>
+  <style>
+      input {
+          display: block;
+          margin-bottom: 10px;
+      }
+      .task-section {
+          margin-bottom: 50px;
+      }
+  </style>
+</head>
+<body>
+<div class="task-section">
+  <label for="rangeN">N:</label>
+  <input id="rangeN" type="text" placeholder="n">
+  <label for="rangeM">M:</label>
+  <input id="rangeM" type="text" placeholder="m">
+  <input type="button" value="Диапазон чисел" id="rangeButton">
+</div>
+
+<div class="task-section">
+  <label for="expA">A:</label>
+  <input id="expA" type="text" placeholder="a">
+  <label for="expB">B:</label>
+  <input id="expB" type="text" placeholder="b">
+  <input type="button" value="Возведенние в степень(expression)" id="expExpressionButton">
+  <input type="button" value="Возведенние в степень(arrow)" id="expArrowButton">
+</div>
+
+<div class="task-section">
+  <label for="multiA">A:</label>
+  <input id="multiA" type="text" placeholder="a">
+  <label for="multiB">B:</label>
+  <input id="multiB" type="text" placeholder="b">
+  <input type="button" value="Умножение на 0,3" id="multiButton">
+</div>
+
+<div class="task-section">
+  <label for="randMin">Min:</label>
+  <input id="randMin" type="text" placeholder="min">
+  <label for="randMax">Max:</label>
+  <input id="randMax" type="text" placeholder="max">
+  <input type="button" value="Рандомное число в диапазоне" id="randNumberButton">
+</div>
+
+<div class="task-section">
+  <label for="str">String:</label>
+  <input id="str" type="text" placeholder="String">
+  <label for="substr">Substring:</label>
+  <input id="substr" type="text" placeholder="Substring">
+  <input type="button" value="Индексы всех вхождений" id="getIndexButton">
+</div>
+
+<div class="task-section">
+  <label for="readonlyStr">String</label>
+  <input id="readonlyStr" type="text" value="ECMAScript 2015 (6th Edition, ECMA-262)" readonly>
+  <input type="button" value="Все численные значения" id="getNumbersButton">
+  <input type="button" value="Все символы в верхнем регистре" id="getUpperCaseButton">
+</div>
+
+<script src="tasksWithNumbers.js"></script>
+<script src="tasksWithStrings.js"></script>
+<script src="eventListeners.js"></script>
+</body>
+</html>
