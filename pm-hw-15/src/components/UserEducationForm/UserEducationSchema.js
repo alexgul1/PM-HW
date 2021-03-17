@@ -13,7 +13,11 @@ const UserEducationSchema = Yup.object().shape({
           .max(50, 'Too Long!')
           .required('Required'),
         startDate: Yup.date().typeError("Invalid Date").required('Required'),
-        endDate: Yup.date().typeError("Invalid Date").required('Required')
+        endDate: Yup.date()
+          .when(
+            'startDate',
+            (startDate, schema) => (startDate && schema.min(startDate, "End date must be greater"))
+          )
       })
     )
     .required("Must have education")

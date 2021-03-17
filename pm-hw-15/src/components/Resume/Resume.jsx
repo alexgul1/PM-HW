@@ -22,8 +22,8 @@ const Resume = () => {
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>Work Experience</h2>
         <div className={styles.timeline}>
-          {experience.map(({position, company, startDate, endDate}) => (
-            <div className={classNames(styles.timelineCard, styles.workBorderColor)}>
+          {experience.map(({position, company, startDate, endDate}, index) => (
+            <div key={index}  className={classNames(styles.timelineCard, styles.workBorderColor)}>
               <div className={styles.timelineHead}>
                 {position} <span className={styles.muted}>at {company}</span>
                 <p className={classNames(styles.muted, styles.timelineDate)}>{startDate} - {endDate}</p>
@@ -36,8 +36,8 @@ const Resume = () => {
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>Education</h2>
         <div className={styles.timeline}>
-          {education.map(({school, speciality, startDate, endDate}) => (
-            <div className={classNames(styles.timelineCard, styles.eduBorderColor)}>
+          {education.map(({school, speciality, startDate, endDate}, index) => (
+            <div key={index} className={classNames(styles.timelineCard, styles.eduBorderColor)}>
               <div className={styles.timelineHead}>
                 {speciality} <span className={styles.muted}>from {school}</span>
                 <p className={classNames(styles.muted, styles.timelineDate)}>{startDate} - {endDate}</p>

@@ -40,28 +40,24 @@ const UserExperienceForm = ({prevStep}) => {
                   {values.companies.length > 0 &&
                   values.companies.map((company, index) => (
                     <div className={styles.form} key={index}>
-                      <div className={styles.fieldBoxRow}>
-                        <FieldBox name={`companies.${index}.position`} value={values.companies[index].position}
-                                  label="Position" error={getIn(errors, `companies[${index}].position`)}
-                                  isTouched={getIn(touched, `companies[${index}].position`)}/>
+                      <FieldBox name={`companies.${index}.position`} value={values.companies[index].position}
+                                label="Position" error={getIn(errors, `companies[${index}].position`)}
+                                isTouched={getIn(touched, `companies[${index}].position`)}/>
 
-                        <FieldBox name={`companies.${index}.company`} value={values.companies[index].company}
-                                  label="Company" error={getIn(errors, `companies[${index}].company`)}
-                                  isTouched={getIn(touched, `companies[${index}].company`)}/>
-                      </div>
-                      <div className={styles.fieldBoxRow}>
-                        <FieldBox name={`companies.${index}.startDate`} value={values.companies[index].startDate}
-                                  type="date" label="Start Date" error={getIn(errors, `companies[${index}].startDate`)}
-                                  isTouched={getIn(touched, `companies[${index}].startDate`)}/>
+                      <FieldBox name={`companies.${index}.company`} value={values.companies[index].company}
+                                label="Company" error={getIn(errors, `companies[${index}].company`)}
+                                isTouched={getIn(touched, `companies[${index}].company`)}/>
+                      <FieldBox name={`companies.${index}.startDate`} value={values.companies[index].startDate}
+                                type="date" label="Start Date" error={getIn(errors, `companies[${index}].startDate`)}
+                                isTouched={getIn(touched, `companies[${index}].startDate`)}/>
 
-                        <FieldBox name={`companies.${index}.endDate`} value={values.companies[index].endDate}
-                                  type="date" label="End Date" error={getIn(errors, `companies[${index}].endDate`)}
-                                  isTouched={getIn(touched, `companies[${index}].endDate`)}/>
+                      <FieldBox name={`companies.${index}.endDate`} value={values.companies[index].endDate}
+                                type="date" label="End Date" error={getIn(errors, `companies[${index}].endDate`)}
+                                isTouched={getIn(touched, `companies[${index}].endDate`)}/>
 
-                        <button type="button" className={classNames(styles.btn, styles.removeBtn)}
-                                onClick={() => remove(index)}>Remove
-                        </button>
-                      </div>
+                      <button type="button" className={classNames(styles.btn, styles.removeBtn)}
+                              onClick={() => remove(index)}>Remove
+                      </button>
                     </div>
                   ))}
 
