@@ -8,8 +8,8 @@ import Resume from "./components/Resume/Resume";
 function App() {
   return (
     <div className={styles.container}>
-      {/*<UserForm />*/}
-      <Resume />
+      <UserForm />
+      {/*<Resume />*/}
     </div>
   );
 }
