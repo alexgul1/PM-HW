@@ -20,7 +20,7 @@ const UserEducationForm = ({nextStep, prevStep}) => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <h1 className={styles.title}>User Education</h1>
       <Formik
         initialValues={{
@@ -37,11 +37,11 @@ const UserEducationForm = ({nextStep, prevStep}) => {
                   values.schools.map((school, index) => (
                     <div className={styles.form} key={index}>
                       <FieldBox name={`schools.${index}.school`} value={values.schools[index].school}
-                                label="School Name" error={getIn(errors, `schools[${index}].school`)}
+                                label="School" error={getIn(errors, `schools[${index}].school`)}
                                 isTouched={getIn(touched, `schools[${index}].school`)}/>
 
                       <FieldBox name={`schools.${index}.speciality`} value={values.schools[index].speciality}
-                                label="Speciality Name" error={getIn(errors, `schools[${index}].speciality`)}
+                                label="Speciality" error={getIn(errors, `schools[${index}].speciality`)}
                                 isTouched={getIn(touched, `schools[${index}].speciality`)}/>
                       <FieldBox name={`schools.${index}.startDate`} value={values.schools[index].startDate}
                                 type="date"
@@ -74,7 +74,7 @@ const UserEducationForm = ({nextStep, prevStep}) => {
           </Form>
         )}
       </Formik>
-    </div>
+    </React.Fragment>
   )
 }
 

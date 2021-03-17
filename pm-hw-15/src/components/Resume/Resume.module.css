@@ -78,3 +78,22 @@
 .eduBorderColor::before {
     border-color: #20C997;
 }
+
+.btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    outline: none;
+    border-radius: 4px;
+    transition:.2s ease-in-out;
+    cursor: pointer;
+    color: white;
+    background-color: #444444;
+    border: 2px solid #444444;
+}
+
+.btn:hover {
+    background-color: #111114;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Formik, Field, Form} from "formik";
+import {Formik, Form} from "formik";
 import classNames from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
 
@@ -20,7 +20,7 @@ const UserDetailsForm = ({nextStep}) => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <h1 className={styles.title}>User details</h1>
 
       <Formik
@@ -56,7 +56,7 @@ const UserDetailsForm = ({nextStep}) => {
       </Formik>
 
 
-    </div>
+    </React.Fragment>
   )
 }
 

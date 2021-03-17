@@ -8,11 +8,11 @@
     border-radius: 4px;
     transition:.2s ease-in-out;
     cursor: pointer;
-    color: #111114;
-    background-color: #e2e2e4;
-    border: 2px solid #e2e2e4;
+    color: white;
+    background-color: #444444;
+    border: 2px solid #444444;
 }
 
 .btn:hover {
-    background-color: #ccccc4;
+    background-color: #111114;
 }
