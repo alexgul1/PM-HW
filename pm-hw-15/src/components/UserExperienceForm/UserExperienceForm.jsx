@@ -1,57 +1,65 @@
 import React from "react";
-import {Field, FieldArray, Form, Formik} from "formik";
+import {Field, FieldArray, Form, Formik, getIn} from "formik";
 import classNames from 'classnames';
 
 import styles from '../UserForm/UserForm.module.css';
+import {useHistory} from "react-router-dom";
+import FieldBox from "../FieldBox/FieldBox";
 
-const UserExperienceForm = ({nextStep, prevStep}) => {
+import UserExperienceSchema from "./UserExperienceSchema";
+import UserExperience from "./UserExperience";
+
+const UserExperienceForm = ({prevStep}) => {
+  const history = useHistory();
+
   const onSubmit = (values) => {
-    console.log(values)
-    nextStep()
+    console.log(values);
+    history.push('/resume');
   }
 
   return (
     <div>
       <h1 className={styles.title}>User Experience</h1>
-      <Formik initialValues={{
-        companies: [
-          {
-            position: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-          }
-        ]
-      }} onSubmit={onSubmit}>
-        {({values}) => (
+      <Formik
+        initialValues={{
+          companies: [
+            {
+              position: '',
+              company: '',
+              startDate: '',
+              endDate: '',
+            }
+          ]
+        }}
+        validationSchema={UserExperienceSchema}
+        onSubmit={onSubmit}>
+        {({values, touched, errors}) => (
           <Form>
             <FieldArray name="companies">
               {({remove, push}) => (
+
                 <div className={styles.formContainer}>
                   {values.companies.length > 0 &&
                   values.companies.map((company, index) => (
                     <div className={styles.form} key={index}>
                       <div className={styles.fieldBoxRow}>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`companies.${index}.position`}>Position</label>
-                          <Field className={styles.field} name={`companies.${index}.position`} placeholder="Position"/>
-                        </div>
+                        <FieldBox name={`companies.${index}.position`} value={values.companies[index].position}
+                                  label="Position" error={getIn(errors, `companies[${index}].position`)}
+                                  isTouched={getIn(touched, `companies[${index}].position`)}/>
 
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`companies.${index}.company`}>Company</label>
-                          <Field className={styles.field} name={`companies.${index}.company`} placeholder="Company"/>
-                        </div>
+                        <FieldBox name={`companies.${index}.company`} value={values.companies[index].company}
+                                  label="Company" error={getIn(errors, `companies[${index}].company`)}
+                                  isTouched={getIn(touched, `companies[${index}].company`)}/>
                       </div>
                       <div className={styles.fieldBoxRow}>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`companies.${index}.startDate`}>Start Date</label>
-                          <Field className={styles.field} name={`companies.${index}.startDate`} placeholder="Start date" type="date"/>
-                        </div>
+                        <FieldBox name={`companies.${index}.startDate`} value={values.companies[index].startDate}
+                                  type="date" label="Start Date" error={getIn(errors, `companies[${index}].startDate`)}
+                                  isTouched={getIn(touched, `companies[${index}].startDate`)}/>
 
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`companies.${index}.endDate`}>End Date</label>
-                          <Field className={styles.field} name={`companies.${index}.endDate`} placeholder="End date" type="date"/>
-                        </div>
+                        <FieldBox name={`companies.${index}.endDate`} value={values.companies[index].endDate}
+                                  type="date" label="End Date" error={getIn(errors, `companies[${index}].endDate`)}
+                                  isTouched={getIn(touched, `companies[${index}].endDate`)}/>
+
                         <button type="button" className={classNames(styles.btn, styles.removeBtn)}
                                 onClick={() => remove(index)}>Remove
                         </button>
@@ -60,12 +68,8 @@ const UserExperienceForm = ({nextStep, prevStep}) => {
                   ))}
 
                   <div className={styles.btnBoxRow}>
-                    <button className={classNames(styles.btn, styles.addMoreBtn)} type="button" onClick={() => push({
-                      schoolName: '',
-                      specialityName: '',
-                      startDate: '',
-                      endDate: ''
-                    })}>Add more
+                    <button className={classNames(styles.btn, styles.addMoreBtn)} type="button"
+                            onClick={() => push(new UserExperience())}>Add more
                     </button>
                   </div>
                 </div>
@@ -74,7 +78,7 @@ const UserExperienceForm = ({nextStep, prevStep}) => {
             <div className={styles.btnBoxRow}>
               <button className={classNames(styles.btn, styles.prevBtn)} type="button" onClick={prevStep}>Prev Step
               </button>
-              <button className={classNames(styles.btn, styles.nextBtn)} type="submit">Next Step</button>
+              <button className={classNames(styles.btn, styles.nextBtn)} type="submit">Create Resume</button>
             </div>
           </Form>
         )}

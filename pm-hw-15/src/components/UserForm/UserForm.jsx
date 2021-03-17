@@ -18,7 +18,6 @@ const UserForm = () => {
     case 1: return <UserDetailsForm nextStep={nextStep} />;
     case 2: return <UserEducationForm nextStep={nextStep} prevStep={prevStep} />;
     case 3: return <UserExperienceForm nextStep={nextStep} prevStep={prevStep} />;
-    default: return <div>asd</div>
   }
 }
 

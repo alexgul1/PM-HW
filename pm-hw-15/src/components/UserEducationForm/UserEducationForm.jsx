@@ -1,8 +1,11 @@
 import React from "react";
-import {Field, FieldArray, Form, Formik} from "formik";
+import {Field, FieldArray, Form, Formik, getIn} from "formik";
 import classNames from 'classnames';
 
 import styles from '../UserForm/UserForm.module.css';
+import UserEducationSchema from "./UserEducationSchema";
+import UserEducation from "./UserEducation";
+import FieldBox from "../FieldBox/FieldBox";
 
 const UserEducationForm = ({nextStep, prevStep}) => {
   const onSubmit = (values) => {
@@ -13,17 +16,20 @@ const UserEducationForm = ({nextStep, prevStep}) => {
   return (
     <div>
       <h1 className={styles.title}>User Education</h1>
-      <Formik initialValues={{
-        schools: [
-          {
-            schoolName: '',
-            specialityName: '',
-            startDate: '',
-            endDate: ''
-          }
-        ]
-      }} onSubmit={onSubmit}>
-        {({values}) => (
+      <Formik
+        initialValues={{
+          schools: [
+            {
+              school: '',
+              speciality: '',
+              startDate: '',
+              endDate: ''
+            }
+          ]
+        }}
+        validationSchema={UserEducationSchema}
+        onSubmit={onSubmit}>
+        {({values, touched, errors}) => (
           <Form>
             <FieldArray name="schools">
               {({remove, push}) => (
@@ -32,30 +38,24 @@ const UserEducationForm = ({nextStep, prevStep}) => {
                   values.schools.map((school, index) => (
                     <div className={styles.form} key={index}>
                       <div className={styles.fieldBoxRow}>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`schools.${index}.schoolName`}>School
-                            Name</label>
-                          <Field className={styles.field} name={`schools.${index}.schoolName`}
-                                 placeholder="School Name"/>
-                        </div>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`schools.${index}.specialityName`}>Speciality
-                            Name</label>
-                          <Field className={styles.field} name={`schools.${index}.specialityName`}
-                                 placeholder="Speciality Name"/>
-                        </div>
+                        <FieldBox name={`schools.${index}.school`} value={values.schools[index].school}
+                                  label="School Name" error={getIn(errors, `schools[${index}].school`)}
+                                  isTouched={getIn(touched, `schools[${index}].school`)}/>
+
+                        <FieldBox name={`schools.${index}.speciality`} value={values.schools[index].speciality}
+                                  label="Speciality Name" error={getIn(errors, `schools[${index}].speciality`)}
+                                  isTouched={getIn(touched, `schools[${index}].speciality`)}/>
                       </div>
                       <div className={styles.fieldBoxRow}>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`schools.${index}.startDate`}>Start Date</label>
-                          <Field className={styles.field} name={`schools.${index}.startDate`} placeholder="Start date"
-                                 type="date"/>
-                        </div>
-                        <div className={styles.fieldBox}>
-                          <label className={styles.fieldLabel} htmlFor={`schools.${index}.endDate`}>End Date</label>
-                          <Field className={styles.field} name={`schools.${index}.endDate`} placeholder="End date"
-                                 type="date"/>
-                        </div>
+                        <FieldBox name={`schools.${index}.startDate`} value={values.schools[index].startDate}
+                                  type="date"
+                                  label="Start Date" error={getIn(errors, `schools[${index}].startDate`)}
+                                  isTouched={getIn(touched, `schools[${index}].startDate`)}/>
+
+                        <FieldBox name={`schools.${index}.endDate`} value={values.schools[index].endDate} type="date"
+                                  label="Start Date" error={getIn(errors, `schools[${index}].endDate`)}
+                                  isTouched={getIn(touched, `schools[${index}].endDate`)}/>
+
                         <button type="button" className={classNames(styles.btn, styles.removeBtn)}
                                 onClick={() => remove(index)}>Remove
                         </button>
@@ -64,12 +64,8 @@ const UserEducationForm = ({nextStep, prevStep}) => {
                   ))}
 
                   <div className={styles.btnBoxRow}>
-                    <button className={classNames(styles.btn, styles.addMoreBtn)} type="button" onClick={() => push({
-                      schoolName: '',
-                      specialityName: '',
-                      startDate: '',
-                      endDate: ''
-                    })}>Add more
+                    <button className={classNames(styles.btn, styles.addMoreBtn)} type="button"
+                            onClick={() => push(new UserEducation())}>Add more
                     </button>
                   </div>
                 </div>
