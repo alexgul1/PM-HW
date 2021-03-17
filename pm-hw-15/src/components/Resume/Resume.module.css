@@ -1,0 +1,80 @@
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);
+    margin-bottom: 40px;
+}
+
+.userInfo {
+    align-items: center;
+
+}
+
+.name {
+    font-size: 32px;
+}
+
+.position {
+    font-size: 20px;
+}
+
+.userSocial {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.title {
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.timelineCard::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 100%;
+    width: 16px;
+    height: 16px;
+    top: 16px;
+    left: -12px;
+    border: 4px solid;
+    z-index: 2;
+}
+
+
+.timelineCard {
+    position: relative;
+    margin-left: 16px;
+}
+
+.timelineHead {
+    padding: 16px 24px 0;
+    font-size: 20px;
+}
+
+.muted {
+    color: #757575;
+    font-size: 18px;
+}
+
+.timelineDate {
+    font-size: 14px;
+}
+
+.workBorderColor::before {
+    border-color: #39C0ED;
+}
+
+.eduBorderColor::before {
+    border-color: #20C997;
+}
