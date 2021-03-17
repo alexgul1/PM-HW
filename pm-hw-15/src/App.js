@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
+import Home from "./components/Home/Home";
 import UserForm from "./components/UserForm/UserForm";
 import Resume from "./components/Resume/Resume";
 
@@ -10,12 +11,12 @@ function App() {
   return (
     <Router>
       <div className={styles.header}>
-        <Link to="/">Home</Link>
+        <Link to="/" className={styles.headerLogo}><h1>Resume builder</h1></Link>
       </div>
       <div className={styles.container}>
         <Switch>
           <Route exact path="/">
-            <h1>home</h1>
+            <Home />
           </Route>
           <Route exact path="/resume-builder">
             <UserForm/>

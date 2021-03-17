@@ -3,3 +3,14 @@
     margin: 0 auto;
     padding: 40px;
 }
+
+.header {
+    background-color: #181818;
+    padding: 10px 20px;
+}
+
+.headerLogo {
+    text-decoration: none;
+    color: white;
+    letter-spacing: 1px;
+}
