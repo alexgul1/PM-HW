@@ -1,3 +1,5 @@
+import {sortByDate} from "../utils/dateUtils";
+
 const SET_EXPERIENCE = 'resume_builder/experience/set';
 
 export const setExperience = (payload) => ({
@@ -10,7 +12,7 @@ const initialState = [];
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case (SET_EXPERIENCE): {
-      return action.payload.companies
+      return action.payload.companies.sort(sortByDate);
     }
     default:
       return state

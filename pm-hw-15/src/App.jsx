@@ -16,7 +16,7 @@ function App() {
       <div className={styles.container}>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home/>
           </Route>
           <Route exact path="/resume-builder">
             <UserForm/>

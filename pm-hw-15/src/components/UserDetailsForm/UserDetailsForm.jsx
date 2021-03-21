@@ -6,9 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import FieldBox from "../FieldBox/FieldBox";
 import UserDetailsSchema from "./UserDetailsSchema";
 import selector from "./UserDetails.selector";
+import {setInfo} from "../../ducks/info";
 
 import styles from '../UserForm/UserForm.module.css';
-import {setInfo} from "../../ducks/info";
 
 const UserDetailsForm = ({nextStep}) => {
   const dispatch = useDispatch();

@@ -1,16 +1,16 @@
 import React from "react";
 import {FieldArray, Form, Formik, getIn} from "formik";
 import classNames from 'classnames';
-
-import styles from '../UserForm/UserForm.module.css';
 import {useHistory} from "react-router-dom";
-import FieldBox from "../FieldBox/FieldBox";
+import {useDispatch, useSelector} from "react-redux";
 
+import FieldBox from "../FieldBox/FieldBox";
 import UserExperienceSchema from "./UserExperienceSchema";
 import UserExperience from "./UserExperience";
-import {useDispatch, useSelector} from "react-redux";
 import selector from "./UserExperience.selector";
 import {setExperience} from "../../ducks/experience";
+
+import styles from '../UserForm/UserForm.module.css';
 
 const UserExperienceForm = ({prevStep}) => {
   const dispatch = useDispatch();
@@ -35,8 +35,9 @@ const UserExperienceForm = ({prevStep}) => {
           <Form>
             <FieldArray name="companies">
               {({remove, push}) => (
-
                 <div className={styles.formContainer}>
+                  {typeof errors.companies === "string" &&
+                  <div className={classNames(styles.errorMsg, styles.mainError)}>{errors.companies}</div>}
                   {values.companies.length > 0 &&
                   values.companies.map((company, index) => (
                     <div className={styles.form} key={index}>

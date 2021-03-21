@@ -1,11 +1,12 @@
 import React from "react";
 import classNames from 'classnames';
 import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 import selector from "./Resume.selector";
+import {dateFormat} from "../../utils/dateUtils";
 
 import styles from './Resume.module.css';
-import {useHistory} from "react-router-dom";
 
 const Resume = () => {
   const history = useHistory();
@@ -38,7 +39,8 @@ const Resume = () => {
                 <div key={index} className={classNames(styles.timelineCard, styles.workBorderColor)}>
                   <div className={styles.timelineHead}>
                     {position} <span className={styles.muted}>at {company}</span>
-                    <p className={classNames(styles.muted, styles.timelineDate)}>{startDate} - {endDate}</p>
+                    <p
+                      className={classNames(styles.muted, styles.timelineDate)}>{dateFormat(startDate)} - {dateFormat(endDate)}</p>
                   </div>
                 </div>
               ))}
@@ -52,12 +54,15 @@ const Resume = () => {
                 <div key={index} className={classNames(styles.timelineCard, styles.eduBorderColor)}>
                   <div className={styles.timelineHead}>
                     {speciality} <span className={styles.muted}>from {school}</span>
-                    <p className={classNames(styles.muted, styles.timelineDate)}>{startDate} - {endDate}</p>
+                    <p
+                      className={classNames(styles.muted, styles.timelineDate)}>{dateFormat(startDate)} - {dateFormat(endDate)}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
+          <button className={styles.btn} type="button" onClick={onClick}>Update Resume</button>
         </React.Fragment>
       }
     </React.Fragment>

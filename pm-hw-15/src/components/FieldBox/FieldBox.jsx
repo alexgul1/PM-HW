@@ -8,7 +8,8 @@ const FieldBox = ({name, value, error, isTouched, label, type}) => {
   return (
     <div className={styles.fieldBox}>
       <label className={styles.fieldLabel} htmlFor={name}>{label}</label>
-      <Field className={classNames(styles.field, {[styles.invalid]: error && isTouched})} value={value} name={name} placeholder={label} type={type}/>
+      <Field className={classNames(styles.field, {[styles.invalid]: error && isTouched})} value={value} name={name}
+             placeholder={label} type={type}/>
       {error && isTouched && <div className={styles.errorMsg}>{error}</div>}
     </div>
   )

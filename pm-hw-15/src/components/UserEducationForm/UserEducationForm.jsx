@@ -1,14 +1,15 @@
 import React from "react";
 import {FieldArray, Form, Formik, getIn} from "formik";
 import classNames from 'classnames';
+import {useDispatch, useSelector} from "react-redux";
 
-import styles from '../UserForm/UserForm.module.css';
 import UserEducationSchema from "./UserEducationSchema";
 import UserEducation from "./UserEducation";
 import FieldBox from "../FieldBox/FieldBox";
-import {useDispatch, useSelector} from "react-redux";
 import selector from "./UserEducation.selector";
 import {setEducation} from "../../ducks/education";
+
+import styles from '../UserForm/UserForm.module.css';
 
 const UserEducationForm = ({nextStep, prevStep}) => {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ const UserEducationForm = ({nextStep, prevStep}) => {
             <FieldArray name="schools">
               {({remove, push}) => (
                 <div className={styles.formContainer}>
+                  {typeof errors.schools === "string" &&
+                  <div className={classNames(styles.errorMsg, styles.mainError)}>{errors.schools}</div>}
                   {values.schools.length > 0 &&
                   values.schools.map((school, index) => (
                     <div className={styles.form} key={index}>
@@ -57,7 +60,6 @@ const UserEducationForm = ({nextStep, prevStep}) => {
                       </button>
                     </div>
                   ))}
-
                   <div className={styles.btnBoxRow}>
                     <button className={classNames(styles.btn, styles.addMoreBtn)} type="button"
                             onClick={() => push(new UserEducation())}>Add more
